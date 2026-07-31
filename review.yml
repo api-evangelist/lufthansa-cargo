@@ -1,0 +1,528 @@
+aid: lufthansa-cargo
+name: Lufthansa Cargo
+review:
+  question: >-
+    Does Lufthansa Cargo publish a callable, standards-conformant API surface that
+    the next party in the air cargo chain - a forwarder, an ePlatform, a handling
+    agent, a postal operator - can integrate against, and on what terms?
+  answer: partial
+  date: '2026-07-30'
+  reviewer: API Evangelist
+  tier: air-cargo-carrier
+  cohort: air-cargo-parcel
+  homeCountry: Germany
+domain:
+  hinted: lufthansa-cargo.com
+  confirmed: lufthansa-cargo.com
+  note: >-
+    Hint confirmed as the real primary domain. https://lufthansa-cargo.com and
+    https://www.lufthansa-cargo.com both returned HTTP 403 to scripted requests -
+    a Cloudflare interstitial ("Just a moment... Enable JavaScript and cookies to
+    continue"), not a dead host. The developer subdomain on the same apex is
+    unprotected and returned HTTP 200, which is where all evidence below comes
+    from. The corporate entity is Lufthansa Cargo AG, Frankfurt, Germany, an
+    airline subsidiary of Deutsche Lufthansa AG.
+findings:
+  summary: |
+    Lufthansa Cargo runs a real, live, publicly reachable developer portal at
+    developer.lufthansa-cargo.com (Apigee integrated portal, site id
+    lhg-lcagapi-gnw-p-lufthansacargodeveloperportalprod). It lists ten published
+    API products. Four of those ten carry a genuine OpenAPI 3.0 document that is
+    anonymously downloadable with no login and no key - Shipment Tracking, Shipment
+    Tracking Subscribe, Routing Offer and Station Information - and all four were
+    harvested verbatim into openapi/ and parse.
+
+    The other six - smartBooking, TruckPreAdvice, ULDStatus, AirMail, CargoXML and
+    CargoIMP - are published as OpenAPI info blocks only. Each is a valid YAML
+    fragment with an `openapi` version and an `info` object and nothing else: no
+    servers, no paths, no components. The description field of each is, in whole or
+    in part, the sentence "Please be aware that Lufthansa Cargo will only give
+    access to the API upon prior approval and agreement. Please contact LH Cargo in
+    case of interest." Because they declare no operations they are not valid
+    OpenAPI documents and were deliberately not saved into openapi/; they are
+    recorded here in full instead.
+
+    That split is the finding. The read-only surface (tracking, routing, station
+    reference data) is open enough to design against before you sign anything. The
+    transacting surface (booking, ULD telematics, truck pre-advice, airmail) and
+    the entire EDI surface (Cargo-XML, Cargo-IMP) are behind a bilateral agreement
+    with nothing machine-readable published at all.
+  portal:
+    url: https://developer.lufthansa-cargo.com/
+    httpStatus: 200
+    confirmed: true
+    platform: Google Apigee integrated developer portal (Angular SPA)
+    siteId: lhg-lcagapi-gnw-p-lufthansacargodeveloperportalprod
+    anonymousSpecDownload: true
+    note: >-
+      The portal's own JSON API confirms anonymous access - every apiDoc record
+      returns "anonAllowed": true, and download_spec served the full OpenAPI to an
+      unauthenticated request. The onboarding page states plainly that the
+      production portal allows users to "Download API specifications
+      (self-service)".
+  probes:
+    - url: https://lufthansa-cargo.com
+      status: 403
+      note: Redirects to www; Cloudflare JS interstitial blocks scripted fetch.
+    - url: https://www.lufthansa-cargo.com/
+      status: 403
+      note: Same interstitial. Corporate site is human-browsable, not machine-readable.
+    - url: https://www.lufthansa-cargo.com/en/onerecord
+      status: 403
+      note: ONE Record marketing page exists per search indexing but is Cloudflare-gated.
+    - url: https://developer.lufthansa-cargo.com/
+      status: 200
+      note: Live developer portal, no login required to reach.
+    - url: https://developer.lufthansa-cargo.com/siteid
+      status: 200
+      note: Returns the Apigee portal site id used to reach the portal JSON API.
+    - url: https://developer.lufthansa-cargo.com/portals/api/sites/lhg-lcagapi-gnw-p-lufthansacargodeveloperportalprod/liveportal/apis
+      status: 200
+      note: Public API catalog. Returned 10 published apiDocs, all anonAllowed true.
+    - url: https://developers.lufthansa-cargo.com
+      status: 000
+      note: Does not resolve.
+    - url: https://docs.lufthansa-cargo.com
+      status: 000
+      note: Does not resolve.
+    - url: https://api.lufthansa-cargo.com
+      status: 404
+      note: Gateway host is live but the root path 404s; it is not a portal.
+    - url: https://api.lufthansa-cargo.com/openapi.json
+      status: 404
+    - url: https://api.lufthansa-cargo.com/swagger.json
+      status: 404
+    - url: https://api.lufthansa-cargo.com/.well-known/
+      status: 404
+    - url: https://api.lufthansa-cargo.com/.well-known/one-record
+      status: 404
+      note: >-
+        Probed specifically for a ONE Record discovery document. Not present -
+        Lufthansa Cargo publishes no ONE Record endpoint of its own.
+    - url: https://api.lufthansa-cargo.com/lhcargo/handling/shipmenttracking/v4/shipment
+      status: 401
+      note: >-
+        Confirms the gateway is live and the documented base path is real; rejects
+        an unkeyed call as expected.
+    - url: https://developer.lufthansa-cargo.com/openapi.json
+      status: 200
+      note: >-
+        FALSE POSITIVE - the Angular SPA returns its index.html for any unmatched
+        path. Body is HTML, not JSON. Treated as absent.
+    - url: https://developer.lufthansa-cargo.com/.well-known/security.txt
+      status: 200
+      note: >-
+        FALSE POSITIVE - same SPA index.html fallback. No security.txt is published.
+    - url: https://developer-test.lufthansa-cargo.com
+      status: 200
+      note: >-
+        Separate test portal, site id lhg-lcagapi-73b93p-n-lufthansacargodeveloperportal.
+        Its public API catalog returns zero apiDocs; the onboarding page confirms
+        the test environment is "controlled" - users may register only, and cannot
+        create applications or request APIs themselves.
+    - url: https://github.com/LufthansaCargo
+      status: 200
+      note: >-
+        Real GitHub organization (id 67584811, created 2020-06-29, website
+        www.lufthansa-cargo.com) with ZERO public repositories. No SDKs, no specs,
+        no samples published there.
+    - url: https://github.com/lufthansa-cargo
+      status: 200
+      note: GitHub HTML soft-200; the API confirms no such org exists (404).
+    - url: https://api.developer.iata.org/lufthansa-cargo/api/shipment-tracking
+      status: 000
+      note: >-
+        Surfaced in search as an IATA-hosted listing of the LH Cargo Shipment
+        Tracking API; host did not resolve on probe, so not treated as evidence.
+  apiProductsPublished:
+    - apiId: shipmenttrackingpublic
+      title: Shipment Tracking API
+      specHarvested: true
+      specFormat: YAML
+      operations: 1
+    - apiId: shipmenttrackingsubscribepublic
+      title: Shipment Tracking Subscribe API
+      specHarvested: true
+      specFormat: YAML
+      operations: 5
+    - apiId: routingpublic
+      title: Routing Offer API
+      specHarvested: true
+      specFormat: JSON (served as YAML by download_spec)
+      operations: 1
+    - apiId: stationinformationpublic
+      title: Station Information API
+      specHarvested: true
+      specFormat: YAML
+      operations: 3
+    - apiId: smartbooking
+      title: SmartBooking API
+      specHarvested: false
+      specId: SmartBooking Dummy
+      note: >-
+        Info block only. Operations are named in prose on
+        /prior-agreement-apis (Product Offer Request, Booking, Update Booking,
+        Get Booking, Delete Booking, Booking Push) but no contract is published.
+    - apiId: truckpreadvice
+      title: TruckPreAdvice API
+      specHarvested: false
+      note: Info block only. Save / Get / Update named in prose; no contract.
+    - apiId: uldstatus
+      title: ULDStatus API
+      specHarvested: false
+      note: >-
+        Info block only. smartULD sensory data (temperature, battery, geodata) and
+        subscription CRUD named in prose; no contract.
+    - apiId: airmail
+      title: AirMail API
+      specHarvested: false
+      specId: AirMail Dummy
+      note: Info block only. Description is the prior-approval notice and nothing else.
+    - apiId: cargoxml
+      title: CargoXML API
+      specHarvested: false
+      specId: CargoXML - Copy
+      note: Info block only. Description is the prior-approval notice and nothing else.
+    - apiId: cargoimp
+      title: CargoIMP API
+      specHarvested: false
+      note: >-
+        Info block only, titled "CargoMessaging APIs". Description is the
+        prior-approval notice and nothing else.
+interoperability:
+  standardConformance:
+    verdict: >-
+      Partial and indirect. Lufthansa Cargo implements IATA ONE Record in
+      production as of July 2026, but through a third party's server and not on
+      any surface it publishes; the standards it publishes as its own API products
+      (Cargo-XML, Cargo-IMP) are gated stubs with no version, message set or
+      schema disclosed. The four contracts it does publish are proprietary REST
+      shapes that reuse open IATA vocabulary internally.
+    standards:
+      - standard: IATA ONE Record
+        version: >-
+          Not stated. Coverage says IATA "introduced ONE Record in January 2026";
+          no version, release or profile is named by Lufthansa Cargo.
+        status: implemented-in-production-but-not-published
+        evidence: https://www.mynewsdesk.com/lufthansa-cargo-ag/pressreleases/lufthansa-cargo-wisetech-global-and-ibs-software-shape-the-future-of-air-cargo-with-one-record-3458252
+        note: >-
+          Lufthansa Cargo, WiseTech Global and IBS Software announced a live ONE
+          Record data exchange on 14 July 2026. Master Air Waybill records were
+          executed by a forwarder in WiseTech's CargoWise and "successfully
+          received and processed in Lufthansa Cargo's system via the IBS ONE
+          Record server". The integration is therefore mediated by IBS Software's
+          ONE Record server, not by a Lufthansa Cargo endpoint. Nothing on
+          developer.lufthansa-cargo.com references ONE Record, no ONE Record API
+          product is listed among the ten, and
+          api.lufthansa-cargo.com/.well-known/one-record returned 404. This is
+          exactly the travel-quartet pattern repeating downstream: the standard is
+          adopted operationally while the carrier's own published surface stays
+          proprietary.
+      - standard: IATA Cargo-XML
+        version: not published
+        status: gated-product-no-contract
+        evidence: https://developer.lufthansa-cargo.com/apis/cargoxml
+        note: >-
+          Listed as a published API product ("CargoXML API") whose OpenAPI 3.0.3
+          document contains only info.title "CargoXML APIs" and the prior-approval
+          notice. No message types, no edition, no endpoint.
+      - standard: IATA Cargo-IMP
+        version: not published
+        status: gated-product-no-contract
+        evidence: https://developer.lufthansa-cargo.com/apis/cargoimp
+        note: >-
+          Listed as "CargoIMP API", OpenAPI 3.0.1 info block titled
+          "CargoMessaging APIs", description is the prior-approval notice only.
+          IATA froze Cargo-IMP at the 34th edition in 2014; no edition is stated.
+      - standard: IATA cargo status / movement codes
+        version: not versioned
+        status: vocabulary-reused-inside-proprietary-contract
+        evidence: openapi/lufthansa-cargo-shipment-tracking-subscribe-api-openapi.yml
+        note: >-
+          The subscribe API's shipmentStatus filter enumerates the standard IATA
+          cargo status codes RCS, MAN, DEP, ARR, RCF, NFD, DLV, DDL, RCT, TFD,
+          DIS, TOA, PRE. This is the one genuinely shared vocabulary in the
+          published surface - a forwarder already speaking FSU/FWB status codes
+          can map it without a glossary, even though the envelope is proprietary.
+      - standard: IATA location codes
+        version: n/a
+        status: identifier-standard-reused
+        evidence: openapi/lufthansa-cargo-routing-offer-api-openapi.yml
+        note: >-
+          3-letter IATA airport/station codes are the routing and station-reference
+          keys throughout.
+      - standard: DCSA
+        status: not-applicable
+        note: Air cargo carrier, not an ocean container line. DCSA is out of scope.
+      - standard: GS1 (EPCIS, GTIN/SSCC/GLN)
+        status: no-reference-found
+        note: No GS1 identifier or EPCIS event vocabulary appears anywhere in the four harvested specs or on the portal.
+      - standard: UN/EDIFACT, ANSI X12
+        status: no-direct-reference-found
+        note: >-
+          Neither is named on the portal. Cargo-IMP is itself EDIFACT-derived, but
+          Lufthansa Cargo never names EDIFACT.
+      - standard: UN/CEFACT MMT RDM, WCO Data Model, eFTI, MLETR
+        status: no-reference-found
+      - standard: e-freight / eAWB
+        status: referenced-only-as-a-response-field
+        evidence: openapi/lufthansa-cargo-shipment-tracking-api-openapi.yml
+        note: >-
+          The Shipment Tracking response carries an `efreightDetails` object, so
+          e-freight status is exposed, but no e-freight or eAWB standard, version
+          or IATA Resolution is cited.
+  interfaceShape: standard-plus-proprietary
+  interfaceShapeNote: >-
+    Graded standard-plus-proprietary, and only just. The four published contracts
+    are unambiguously Lufthansa-Cargo-specific in structure - paths like
+    /lhcargo/handling/shipmenttracking/v4/shipment, a carrier-private product-code
+    enumeration (FAN, FCO, FCP, YCP, ZXF...), a milestonePlan/milestone response
+    model that no other carrier implements, and an `apikey` header scheme. Nobody
+    else implements this shape, so a forwarder integrating Lufthansa Cargo does an
+    N-of-1 integration. What lifts it above plain proprietary-documented is that
+    the payload keys are open industry identifiers (AWB prefix + number, IATA
+    station codes) and the event filter is the open IATA status code set, so the
+    data inside the proprietary envelope is portable even when the envelope is not.
+    The genuinely open-standard path - ONE Record - exists in production but is not
+    part of the published interface.
+  identifierScheme: >-
+    IATA Air Waybill numbers as the primary shipment key - a 3-digit airline
+    numeric prefix (020 = Lufthansa Cargo, validated ^\d{3}$) plus an 8-digit AWB
+    serial (^\d{8}$), also expressed as "020-12345678" in the subscribe API, with a
+    check-digit flag, AWB sequence number, revision number and AWB issue station;
+    3-letter IATA airport/station codes for origin, destination, station reference
+    and milestone location; carrier-private Lufthansa Cargo product codes for
+    service class; an optional 9-digit Business Partner Number identifying the
+    contracted counterparty on subscriptions; and UUIDv4 opaque subscription IDs.
+    No GS1 GTIN/SSCC/GLN, no UN/LOCODE, no EORI, no HS code, no SCAC, no DUNS
+    appears anywhere in the harvested contracts.
+  eventModel: webhook-and-polling
+  eventModelNote: >-
+    Both patterns are published and both are real. Polling: GET
+    /lhcargo/handling/shipmenttracking/v4/shipment returns current status plus the
+    full shipmentStatusEvents history for an AWB. Push: POST
+    /lhcargo/handling/shipmenttrackingpush/v4/subscribe creates a subscription
+    against a caller-supplied HTTPS callback URI and the OpenAPI declares a formal
+    `callbacks.shipmentStatusUpdate` block keyed on {$request.body#/callback},
+    requiring the callback host to answer OPTIONS with an Allow header including
+    POST, then receiving ShipmentStatusUpdate payloads by POST. Subscriptions are
+    filtered by IATA status code and managed with full CRUD (GET all by callback,
+    GET/PUT/DELETE by subscriptionId). Notably the carrier maintains an allow-list
+    of callback hosts - the spec documents 401 "Callback host disabled" and 403
+    "Callback host not allowed" - so even the push path is not unilaterally
+    self-serve. ULDStatus advertises the same subscribe pattern for smart-ULD
+    telematics and smartBooking advertises a "Booking Push", but both are
+    prior-agreement products with no contract published. No AsyncAPI document is
+    published.
+  ediLegacy: >-
+    EDI is still a first-class integration path and is treated as a gated product,
+    not a public one. The portfolio explicitly ships CargoXML and CargoIMP
+    ("CargoMessaging") API products, and the how-to-connect page states the
+    offering is "a collection of RESTful and SOAP web services" - the SOAP half
+    being the legacy channel. No message set, edition, VAN, AS2 or mapping
+    requirement is documented publicly; onboarding for these is contact-only via
+    apisupport.lcag@dlh.de. Lufthansa Cargo's own ONE Record positioning is that
+    Cargo-IMP and Cargo-XML no longer meet modern data-exchange requirements, so
+    the direction of travel is off EDI - but as of this review the REST veneer
+    covers only tracking, routing and station data, while messaging remains
+    bilateral.
+  multiPartyPosture: >-
+    Publishes to its counterparties, but only after a bilateral relationship
+    exists. The portal is explicitly addressed to "partners, developers and API
+    users", and smartBooking is documented as being directed at forwarders
+    connecting an in-house system and at ePlatforms integrating LH Cargo offers -
+    so the carrier does intend to be resold through aggregators, not only called
+    directly. Anyone at all can read the four public contracts anonymously. But
+    every account registration on both the test and production portals "is reviewed
+    by LH Cargo API Managers before access is granted", the test environment is
+    controlled to the point that only Lufthansa Cargo staff can create applications
+    and grant API access on a user's behalf, production access is granted only
+    after successful test validation, and callback hosts for push must be
+    allow-listed. There is no public partner or marketplace directory of pre-built
+    integrations on the portal; named integrations (WiseTech CargoWise, IBS
+    Software, Fleet Logistics) surface only through press releases. Subscriptions
+    optionally carry a Business Partner Number, which is a contracted-party key.
+  accessGate: application-approval
+  accessGateNote: >-
+    What a developer must actually do, in Lufthansa Cargo's own published order:
+    (1) register an account on the production portal at
+    developer.lufthansa-cargo.com and accept the Terms and Conditions, which
+    incorporate both the General Terms and Conditions and a per-API "Specification
+    of Services Agreement"; (2) wait - registration is reviewed by LH Cargo API
+    managers before access is granted; (3) create an app and request the API
+    products of interest, receiving an API key and secret used as an `APIKEY`
+    request header against https://api.lufthansa-cargo.com; (4) have the LH Cargo
+    API support team provision test-environment access and keys on your behalf,
+    since the test portal does not permit self-service app creation; (5) pass test
+    validation before production access is granted. Quotas are deliberately small
+    at first - "a limited number of requests... enough to explore the API" - and
+    raising them requires contacting the carrier. For smartBooking, TruckPreAdvice,
+    ULDStatus, AirMail, CargoXML and CargoIMP add a prior bilateral agreement
+    negotiated by email before anything at all is issued. Spec download is the one
+    genuinely self-serve step, and only for the four public products.
+  dcsaMembershipVsPublication:
+    applicable: false
+    note: >-
+      DCSA is ocean-container-specific. The air-cargo equivalent asked of this
+      cohort is ONE Record and Cargo-XML, recorded above: Lufthansa Cargo is a
+      visible, publicly-announced ONE Record implementer (July 2026, with WiseTech
+      and IBS Software) that publishes zero ONE Record artifacts of its own, and
+      lists Cargo-XML and Cargo-IMP as products with no contract behind either.
+      Membership and marketing are public; the conformant callable contract is not.
+harvest:
+  method: >-
+    Apigee integrated-portal JSON API. The Angular SPA at
+    developer.lufthansa-cargo.com fetches /siteid, then
+    /portals/api/sites/{siteId}/liveportal/apis for the catalog and
+    /portals/api/sites/{siteId}/liveportal/apis/{apiId}/download_spec for each
+    contract. All calls were unauthenticated.
+  fetchDate: '2026-07-30'
+  specs:
+    - file: openapi/lufthansa-cargo-shipment-tracking-api-openapi.yml
+      sourceURL: https://developer.lufthansa-cargo.com/portals/api/sites/lhg-lcagapi-gnw-p-lufthansacargodeveloperportalprod/liveportal/apis/shipmenttrackingpublic/download_spec
+      httpStatus: 200
+      bytes: 8263
+      openapi: 3.0.0
+      infoVersion: '1.0 - 2022.01.03'
+      parses: true
+      verbatim: true
+    - file: openapi/lufthansa-cargo-shipment-tracking-subscribe-api-openapi.yml
+      sourceURL: https://developer.lufthansa-cargo.com/portals/api/sites/lhg-lcagapi-gnw-p-lufthansacargodeveloperportalprod/liveportal/apis/shipmenttrackingsubscribepublic/download_spec
+      httpStatus: 200
+      bytes: 8128
+      openapi: 3.0.0
+      infoVersion: '1.0 - 2022.01.03'
+      parses: true
+      verbatim: true
+    - file: openapi/lufthansa-cargo-routing-offer-api-openapi.yml
+      sourceURL: https://developer.lufthansa-cargo.com/portals/api/sites/lhg-lcagapi-gnw-p-lufthansacargodeveloperportalprod/liveportal/apis/routingpublic/download_spec
+      httpStatus: 200
+      bytes: 8110
+      openapi: 3.0.0
+      infoVersion: '1.1 - 2022.04.27'
+      parses: true
+      verbatim: true
+    - file: openapi/lufthansa-cargo-station-information-api-openapi.yml
+      sourceURL: https://developer.lufthansa-cargo.com/portals/api/sites/lhg-lcagapi-gnw-p-lufthansacargodeveloperportalprod/liveportal/apis/stationinformationpublic/download_spec
+      httpStatus: 200
+      bytes: 24859
+      openapi: 3.0.0
+      infoVersion: '2.0'
+      parses: true
+      verbatim: true
+  specsNotSaved:
+    reason: >-
+      Fetched successfully (HTTP 200) but contain only `openapi` and `info` - no
+      servers, no paths, no components - so they are not valid OpenAPI documents
+      and would pollute openapi/. Recorded here instead, with byte counts as
+      served.
+    items:
+      - apiId: smartbooking
+        openapi: 3.0.3
+        bytes: 882
+        httpStatus: 200
+      - apiId: truckpreadvice
+        openapi: 3.0.3
+        bytes: 695
+        httpStatus: 200
+      - apiId: uldstatus
+        openapi: 3.0.3
+        bytes: 927
+        httpStatus: 200
+      - apiId: cargoxml
+        openapi: 3.0.3
+        bytes: 207
+        httpStatus: 200
+      - apiId: cargoimp
+        openapi: 3.0.1
+        bytes: 213
+        httpStatus: 200
+      - apiId: airmail
+        openapi: 3.0.3
+        bytes: 206
+        httpStatus: 200
+  staleness:
+    note: >-
+      Three of the four published contracts carry 2022 info.version strings and the
+      fourth is unversioned "2.0". The portal news item dated 1 April 2026
+      announces a new API gateway with customer migration to new endpoints
+      "until end of May 2026", so the published documents may lag the live gateway.
+      Recorded as observed; not corrected.
+authentication:
+  type: apiKey
+  in: header
+  headerName: apikey
+  note: >-
+    Both spellings appear in the published artifacts - `ApikeyAuth` with header
+    name `apikey` in three specs, `ApiKeyAuth` in the Station Information spec, and
+    the how-to-connect page shows `APIKEY: {yourApiKey}`. HTTP headers are
+    case-insensitive so this is cosmetic, but it is an inconsistency across the
+    carrier's own contracts. No OAuth, no mTLS and no scopes are published.
+sources:
+  - url: https://developer.lufthansa-cargo.com/
+    type: DeveloperPortal
+    status: 200
+    note: Live Apigee portal, reachable without login.
+  - url: https://developer.lufthansa-cargo.com/how-to-connect
+    type: Documentation
+    status: 200
+    note: >-
+      Verified via the portal page API. Gateway host https://api.lufthansa-cargo.com,
+      APIKEY header, "collection of RESTful and SOAP web services", initial quota
+      limited by design.
+  - url: https://developer.lufthansa-cargo.com/prior-agreement-apis
+    type: Documentation
+    status: 200
+    note: >-
+      Verified via the portal page API. Names smartBooking, Truck PreAdvice and ULD
+      Status and their operations in prose, each closing with the prior-approval
+      notice.
+  - url: https://developer.lufthansa-cargo.com/partneronboardingprocess
+    type: Onboarding
+    status: 200
+    note: >-
+      Verified via the portal page API. The authoritative statement of the access
+      gate - registration reviewed by LH Cargo API managers, controlled test
+      environment, production-after-test rule.
+  - url: https://developer.lufthansa-cargo.com/terms
+    type: TermsOfService
+    status: 200
+    note: >-
+      General Terms and Conditions plus a per-API "Specification of Services
+      Agreement" must be accepted.
+  - url: https://developer.lufthansa-cargo.com/contact
+    type: Support
+    status: 200
+    note: apisupport.lcag@dlh.de; issue reports keyed on Conversation ID and AWB numbers.
+  - url: https://developer.lufthansa-cargo.com/news
+    type: ChangeLog
+    status: 200
+    note: >-
+      Single entry, 1 April 2026 - "New API Gateway", customer migration to new
+      endpoints through end of May 2026.
+  - url: https://www.mynewsdesk.com/lufthansa-cargo-ag/pressreleases/lufthansa-cargo-wisetech-global-and-ibs-software-shape-the-future-of-air-cargo-with-one-record-3458252
+    type: PressRelease
+    status: 200
+    note: ONE Record production go-live with WiseTech Global and IBS Software, 14 July 2026.
+  - url: https://api.github.com/users/LufthansaCargo
+    type: GitHubOrganization
+    status: 200
+    note: Real org, zero public repositories.
+actions:
+  openapiHarvested: 4
+  apiProductsListed: 10
+  apisYmlCreated: true
+  githubRepoCreated: false
+  pushed: false
+  followUps:
+    - >-
+      Re-probe after the gateway migration completes; the published specs predate
+      the announced endpoint change and may be stale.
+    - >-
+      Watch for a Lufthansa Cargo ONE Record endpoint or well-known document. Today
+      the standard is reachable only through IBS Software's server, which means the
+      carrier's ONE Record conformance is not independently verifiable.
+    - >-
+      smartBooking is the commercially interesting surface for the aggregator layer
+      and is the one with no published contract; worth re-checking whether a spec
+      is ever promoted out of prior-agreement status.

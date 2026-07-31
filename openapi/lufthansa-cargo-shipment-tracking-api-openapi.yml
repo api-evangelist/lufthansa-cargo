@@ -1,0 +1,330 @@
+openapi: "3.0.0"
+info:
+  version: "1.0 - 2022.01.03"
+  title: "Shipment Tracking API"
+  description: "Track shipments easily with this Shipment Tracking API. It enables retrieval of the current shipment status while providing maximum transparency and reliability."
+servers:
+- url: "https://api.lufthansa-cargo.com"
+security:
+- ApikeyAuth: []
+paths:
+  /lhcargo/handling/shipmenttracking/v4/shipment:
+    get:
+      parameters:
+      - name: "aWBPrefix"
+        in: "query"
+        description: "Represents the airline that is the owner of this AWB, i.e. \"\
+          020\" = Lufthansa Cargo"
+        schema:
+          type: "string"
+          pattern: "^\\d{3}$"
+        required: true
+      - name: "aWBNumber"
+        in: "query"
+        description: "The Air Waybill Number (AWB)"
+        schema:
+          type: "string"
+          pattern: "^\\d{8}$"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  shipmentTrackingStatus:
+                    $ref: "#/components/schemas/shipmentTrackingStatus"
+          description: "Success"
+      summary: "Get actual status of shipment"
+      tags:
+      - "Shipment Tracking"
+components:
+  securitySchemes:
+    ApikeyAuth:
+      type: "apiKey"
+      in: "header"
+      name: "apikey"
+  schemas:
+    shipmentTrackingStatus:
+      type: "object"
+      required:
+      - "milestonePlan"
+      - "booking"
+      - "events"
+      - "shipmentStatusEvents"
+      - "shipment"
+      properties:
+        shipment:
+          $ref: "#/components/schemas/shipment"
+        status:
+          type: "string"
+          minLength: 1
+          maxLength: 3
+        milestonePlan:
+          $ref: "#/components/schemas/milestonePlan"
+        booking:
+          $ref: "#/components/schemas/booking"
+        events:
+          $ref: "#/components/schemas/events"
+        efreightDetails:
+          $ref: "#/components/schemas/efreightDetails"
+        flightMovementDetails:
+          $ref: "#/components/schemas/flightMovementDetails"
+        shipmentStatusEvents:
+          $ref: "#/components/schemas/shipmentStatusEvents"
+    shipment:
+      type: "object"
+      required:
+      - "shipmentId"
+      - "awbIssueStation"
+      properties:
+        shipmentId:
+          $ref: "#/components/schemas/shipmentId"
+        awbIssueStation:
+          type: "string"
+    shipmentId:
+      type: "object"
+      required:
+      - "carrierNumericCode"
+      - "aWBNumber"
+      - "isAWBNoCheckDigitUsed"
+      properties:
+        carrierNumericCode:
+          type: "string"
+        closeDateAndTime:
+          type: "string"
+          format: "date-time"
+        aWBNumber:
+          type: "string"
+        isAWBNoCheckDigitUsed:
+          type: "string"
+        aWBSequenceNumber:
+          type: "integer"
+        revisionNo:
+          type: "integer"
+    milestonePlan:
+      type: "object"
+      required:
+      - "version"
+      - "milestones"
+      properties:
+        version:
+          type: "string"
+          minLength: 1
+          maxLength: 10
+        milestones:
+          type: "object"
+          properties:
+            milestone:
+              $ref: "#/components/schemas/milestone"
+    milestone:
+      type: "array"
+      required:
+      - "type"
+      - "events"
+      items:
+        properties:
+          type:
+            type: "string"
+          station:
+            type: "string"
+          plannedTime:
+            type: "string"
+            format: "date-time"
+          actualTime:
+            type: "string"
+            format: "date-time"
+          plannedTotals:
+            $ref: "#/components/schemas/plannedTotals"
+          actualTotals:
+            $ref: "#/components/schemas/actualTotals"
+          flight:
+            $ref: "#/components/schemas/flight"
+          events:
+            $ref: "#/components/schemas/events"
+    plannedTotals:
+      type: "object"
+      required:
+      - "noOfPieces"
+      - "weight"
+      properties:
+        noOfPieces:
+          type: "string"
+        weight:
+          type: "number"
+          format: "float"
+    actualTotals:
+      type: "array"
+      required:
+      - "noOfPieces"
+      - "weight"
+      items:
+        properties:
+          noOfPieces:
+            type: "string"
+          weight:
+            type: "number"
+            format: "float"
+          isComplete:
+            type: "string"
+    flight:
+      type: "object"
+      required:
+      - "flightCarrierCode"
+      - "flightNumber"
+      - "flightDate"
+      properties:
+        flightCarrierCode:
+          type: "string"
+        flightNumber:
+          type: "string"
+        flightDate:
+          type: "string"
+          format: "date"
+        flightSegmentOrigin:
+          type: "string"
+        flightSegmentDestination:
+          type: "string"
+    events:
+      type: "object"
+      properties:
+        event:
+          $ref: "#/components/schemas/event"
+    event:
+      type: "array"
+      required:
+      - "category"
+      items:
+        properties:
+          type:
+            type: "string"
+          station:
+            type: "string"
+          actualTime:
+            type: "string"
+            format: "date-time"
+          actualTotals:
+            $ref: "#/components/schemas/actualTotals"
+          category:
+            type: "string"
+          classifier:
+            type: "string"
+    booking:
+      required:
+      - "product"
+      - "bookingTime"
+      - "isSplitBooking"
+      type: "object"
+      properties:
+        product:
+          $ref: "#/components/schemas/product"
+        totals:
+          $ref: "#/components/schemas/totals"
+        originalTimeFrame:
+          $ref: "#/components/schemas/originalTimeFrame"
+        origin:
+          type: "string"
+        destination:
+          type: "string"
+        bookingTime:
+          type: "string"
+          format: "date-time"
+        isSplitBooking:
+          type: "string"
+        confirmationStatus:
+          type: "string"
+    product:
+      type: "object"
+      properties:
+        productName:
+          type: "string"
+        productConditions:
+          $ref: "#/components/schemas/productConditions"
+    productConditions:
+      type: "object"
+      required:
+      - "sPLList"
+      properties:
+        sPLList:
+          $ref: "#/components/schemas/sPLList"
+        productCode:
+          type: "string"
+    totals:
+      type: "object"
+      required:
+      - "noOfPieces"
+      - "weight"
+      properties:
+        noOfPieces:
+          type: "string"
+        weight:
+          type: "number"
+          format: "float"
+    originalTimeFrame:
+      type: "object"
+      properties:
+        lAT:
+          type: "string"
+          format: "date-time"
+        tOA:
+          type: "string"
+          format: "date-time"
+    sPLList:
+      type: "object"
+      properties:
+        splCode:
+          type: "array"
+          items:
+            type: "string"
+    efreightDetails:
+      type: "object"
+      properties:
+        preCheckStatus:
+          type: "object"
+          properties:
+            precheckStatusCode:
+              type: "string"
+            precheckStatusDescription:
+              type: "string"
+            precheckTime:
+              type: "string"
+              format: "date-time"
+            precheckTimeUTC:
+              type: "string"
+              format: "date-time"
+    flightMovementDetails:
+      type: "object"
+      properties:
+        flightCarrierCode:
+          type: "string"
+        flightNumber:
+          type: "string"
+        flightDate:
+          type: "string"
+          format: "date"
+        eta:
+          type: "string"
+          format: "date-time"
+        etaUTC:
+          type: "string"
+          format: "date-time"
+        flightEventInformation:
+          type: "string"
+    shipmentStatusEvents:
+      type: "object"
+      properties:
+        event:
+          required:
+          - "category"
+          type: "array"
+          items:
+            properties:
+              category:
+                type: "string"
+              type:
+                type: "string"
+              station:
+                type: "string"
+              flight:
+                $ref: "#/components/schemas/flight"

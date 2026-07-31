@@ -1,0 +1,278 @@
+---
+openapi: "3.0.0"
+info:
+  version: "1.0 - 2022.01.03"
+  title: "Shipment Tracking Subscribe API"
+  description: "Receive automatic updates on the status of a shipment. Subscribe for a selected AWB and every time the shipment reaches a new milestone get automatically notified via the API."
+servers:
+- url: "https://api.lufthansa-cargo.com"
+security:
+- ApikeyAuth: []
+paths:
+  /lhcargo/handling/shipmenttrackingpush/v4/subscribe/all:
+    get:
+      operationId: "getAll"
+      parameters:
+      - explode: true
+        in: "query"
+        name: "callback"
+        required: false
+        schema:
+          $ref: "#/components/schemas/callback"
+        style: "form"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/subscriptionId"
+                type: "array"
+          description: "Success"
+        "400":
+          content:
+            text/plain:
+              schema:
+                description: "error message"
+                type: "string"
+          description: "Bad request"
+        "500":
+          description: "Server error"
+      summary: "Get all subscriptions for a given callback"
+      tags:
+      - "Shipment Tracking Subscribe"
+  /lhcargo/handling/shipmenttrackingpush/v4/subscribe:
+    post:
+      callbacks:
+        shipmentStatusUpdate:
+          '{$request.body#/callback}':
+            options:
+              responses:
+                "200":
+                  description: "Allow header must include POST"
+                  headers:
+                    Allow:
+                      explode: false
+                      schema:
+                        type: "string"
+                      style: "simple"
+                "204":
+                  description: "Allow header must include POST"
+                  headers:
+                    Allow:
+                      explode: false
+                      schema:
+                        type: "string"
+                      style: "simple"
+              summary: "Callback check, 200 or 204 response is required"
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ShipmentStatusUpdate"
+                required: true
+              responses:
+                "200":
+                  description: "Callback processed"
+              summary: "callback endpoint"
+      operationId: "subscribe"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+          description: "Subscription created"
+        "400":
+          content:
+            text/plain:
+              schema:
+                description: "error message"
+                type: "string"
+          description: "Bad request"
+        "401":
+          description: "Callback host disabled"
+        "403":
+          description: "Callback host not allowed"
+        "404":
+          description: "Shipment not found"
+        "409":
+          description: "Subscription already exists"
+        "422":
+          description: "Callback is invalid"
+        "424":
+          description: "Callback not reachable"
+        "500":
+          description: "Server error"
+      summary: "Create subscription for AWB"
+      tags:
+      - "Shipment Tracking Subscribe"
+  /lhcargo/handling/shipmenttrackingpush/v4/subscribe/{subscriptionId}:
+    delete:
+      operationId: "delete"
+      parameters:
+      - explode: false
+        in: "path"
+        name: "subscriptionId"
+        required: true
+        schema:
+          $ref: "#/components/schemas/subscriptionId"
+        style: "simple"
+      responses:
+        "204":
+          description: "Success"
+        "404":
+          description: "Subscription not found"
+        "500":
+          description: "Server error"
+      summary: "Delete subscription"
+      tags:
+      - "Shipment Tracking Subscribe"
+    get:
+      description: "Get the details of an existing subscription"
+      operationId: "get"
+      parameters:
+      - explode: false
+        in: "path"
+        name: "subscriptionId"
+        required: true
+        schema:
+          $ref: "#/components/schemas/subscriptionId"
+        style: "simple"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+          description: "Success"
+        "404":
+          description: "Subscription not found"
+        "500":
+          description: "Server error"
+      summary: "Get subscription"
+      tags:
+      - "Shipment Tracking Subscribe"
+    put:
+      operationId: "update"
+      parameters:
+      - explode: false
+        in: "path"
+        name: "subscriptionId"
+        required: true
+        schema:
+          $ref: "#/components/schemas/subscriptionId"
+        style: "simple"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShipmentStatusUpdate"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+          description: "Subscription updated"
+        "400":
+          content:
+            text/plain:
+              schema:
+                description: "error message"
+                type: "string"
+          description: "Bad request"
+        "404":
+          description: "Subscription not found"
+        "500":
+          description: "Server error"
+      summary: "Update subscription"
+      tags:
+      - "Shipment Tracking Subscribe"
+components:
+  securitySchemes:
+    ApikeyAuth:
+      type: "apiKey"
+      in: "header"
+      name: "apikey"
+  schemas:
+    awb:
+      description: "abw number of an shipment"
+      example: "020-12345678"
+      type: "string"
+    callback:
+      description: "Callback URL"
+      example: "https://yoursoftwaresolution.com/lufthansacargo/trackingCallback"
+      format: "uri"
+      type: "string"
+    shipmentStatus:
+      enum:
+      - "*,RCS, MAN, DEP, ARR, RCF, NFD, DLV, DDL, RCT, TFD, DIS, TOA, PRE"
+      type: "string"
+      example: "*"
+    subscriptionId:
+      description: "UUIDv4 of subscription"
+      example: "70904e8c-f953-4ef5-b9f4-6c34711cf801"
+      pattern: "^\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\\
+        b$"
+      type: "string"
+    Subscription:
+      properties:
+        subscriptionId:
+          $ref: "#/components/schemas/subscriptionId"
+        awb:
+          $ref: "#/components/schemas/awb"
+        callback:
+          $ref: "#/components/schemas/callback"
+        states:
+          $ref: "#/components/schemas/shipmentStatus"
+      required:
+      - "awb"
+      - "callback"
+      - "states"
+      - "subscriptionId"
+      type: "object"
+    SubscriptionRequest:
+      properties:
+        awb:
+          $ref: "#/components/schemas/awb"
+        callback:
+          $ref: "#/components/schemas/callback"
+        states:
+          $ref: "#/components/schemas/shipmentStatus"
+        businessPartnerNumber:
+          description: "optional Business Partner Number"
+          example: "987654321"
+          pattern: "\\d{9}$"
+          type: "string"
+      required:
+      - "awb"
+      - "callback"
+      - "states"
+      type: "object"
+    ShipmentStatusUpdate:
+      properties:
+        awb:
+          $ref: "#/components/schemas/awb"
+        callback:
+          $ref: "#/components/schemas/callback"
+        states:
+          $ref: "#/components/schemas/shipmentStatus"
+        businessPartnerNumber:
+          description: "optional Business Partner Number"
+          example: "987654321"
+          pattern: "\\d{9}$"
+          type: "string"
+      required:
+      - "awb"
+      - "callback"
+      - "states"
+      type: "object"

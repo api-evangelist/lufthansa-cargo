@@ -1,0 +1,854 @@
+openapi: "3.0.0"
+info:
+  title: "Station Information API"
+  version: "2.0"
+  contact:
+    email: "apisupport.lcag@dlh.de"
+    url: ""
+  description: "Access station information and receive details such as opening hours, export‑ and import‑relevant information, addresses, and additional operational data for Lufthansa Cargo stations worldwide."
+servers:
+- url: "https://api.lufthansa-cargo.com"
+  description: ""
+tags:
+- name: "stations"
+- name: "products"
+security:
+- ApiKeyAuth: []
+paths:
+  /lhcargo/handling/stations/v1/codes:
+    get:
+      summary: "Get a list of all station codes"
+      tags:
+      - "stations"
+      operationId: "getStationCodes"
+      description: "Receive a list of all stations"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/IATACode"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "401":
+          $ref: "#/components/responses/ErrorResponse"
+        "403":
+          $ref: "#/components/responses/ErrorResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
+  /lhcargo/handling/stations/v1/station:
+    post:
+      summary: "Get detail of the stations in the request"
+      tags:
+      - "stations"
+      operationId: "getStationDetailList"
+      description: "Receive a list of station details"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IATACodeList"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Station"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "401":
+          $ref: "#/components/responses/ErrorResponse"
+        "403":
+          $ref: "#/components/responses/ErrorResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
+  /lhcargo/handling/stations/v1/station/{IATACode}:
+    get:
+      summary: "Get station details"
+      tags:
+      - "stations"
+      operationId: "getStationDetails"
+      description: "get information for one station"
+      parameters:
+      - name: "IATACode"
+        description: "IATACode"
+        in: "path"
+        required: true
+        schema:
+          $ref: "#/components/schemas/IATACode"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Station"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "401":
+          $ref: "#/components/responses/ErrorResponse"
+        "403":
+          $ref: "#/components/responses/ErrorResponse"
+        "404":
+          $ref: "#/components/responses/ErrorResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
+components:
+  responses:
+    ErrorResponse:
+      description: "generic error respoonse"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    Error:
+      type: "object"
+      properties:
+        status:
+          type: "integer"
+        message:
+          type: "string"
+    OpenClose:
+      type: "object"
+      properties:
+        open:
+          type: "string"
+          example: "07:00:00"
+        close:
+          type: "string"
+          example: "17:00:00"
+    DailyOpeningHours:
+      type: "object"
+      properties:
+        day:
+          $ref: "#/components/schemas/DayOfWeek"
+        hours:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/OpenClose"
+    DayOfWeek:
+      type: "string"
+      enum:
+      - "MONDAY"
+      - "TUESDAY"
+      - "WEDNESDAY"
+      - "THURSDAY"
+      - "FRIDAY"
+      - "SATURDAY"
+      - "SUNDAY"
+    Address:
+      type: "object"
+      properties:
+        street:
+          type: "string"
+          example: "South Access Rd."
+        streetNo:
+          type: "string"
+          example: 5
+        building:
+          type: "string"
+          example: "Bldg 616"
+        zipCode:
+          type: "string"
+          example: 60666
+        city:
+          type: "string"
+          example: "Chicago, IL"
+    Contact:
+      type: "object"
+      properties:
+        generalEmail:
+          type: "string"
+          example: null
+        generalPhone:
+          type: "string"
+          example: null
+        handlingEmail:
+          type: "string"
+          example: "ordimport@dlh.de"
+        handlingPhone:
+          type: "string"
+          example: null
+    Export:
+      type: "object"
+      properties:
+        address:
+          $ref: "#/components/schemas/Address"
+        contact:
+          $ref: "#/components/schemas/Contact"
+        openingHours:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/DailyOpeningHours"
+    Import:
+      type: "object"
+      properties:
+        address:
+          $ref: "#/components/schemas/Address"
+        contact:
+          $ref: "#/components/schemas/Contact"
+        firmsCode:
+          type: "string"
+          example: "E821"
+        ciscFee:
+          type: "string"
+          example: null
+        storage:
+          type: "string"
+          example: null
+        extraComment:
+          type: "string"
+          example: null
+        openingHours:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/DailyOpeningHours"
+    IATACode:
+      type: "string"
+      pattern: "^[A-Z]{3}$"
+      example: "ORD"
+    IATACodeList:
+      type: "object"
+      x-nullable: true
+      properties:
+        stationCodes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/IATACode"
+    Station:
+      type: "object"
+      properties:
+        code:
+          $ref: "#/components/schemas/IATACode"
+        name:
+          type: "string"
+          example: "CHICAGO O'HARE INTERNATIONAL AIRPORT"
+        freighterHandling:
+          type: "boolean"
+          example: true
+        passengerAircraftHandling:
+          type: "boolean"
+          example: true
+        truckHandling:
+          type: "boolean"
+          example: true
+        countryShort:
+          type: "string"
+          example: "US"
+        countryLong:
+          type: "string"
+          example: "United States"
+        import:
+          $ref: "#/components/schemas/Import"
+        export:
+          $ref: "#/components/schemas/Export"
+    FullAddress:
+      type: "object"
+      properties:
+        facilityName:
+          type: "string"
+          example: "Lufthansa Cargo"
+        street:
+          type: "string"
+          example: "South Access Rd."
+        streetNo:
+          type: "string"
+          example: 0
+        building:
+          type: "string"
+          example: 616
+        zipCode:
+          type: "string"
+          example: 60666
+        city:
+          type: "string"
+          example: "Chicago, IL"
+        country:
+          type: "string"
+          example: "USA"
+    GroundHandlingAgent:
+      type: "object"
+      properties:
+        companyName:
+          type: "string"
+          example: "self handled"
+        phone:
+          type: "string"
+          example: null
+        eMail:
+          type: "string"
+          example: null
+    HandlingContact:
+      type: "object"
+      properties:
+        phone:
+          type: "string"
+          example: null
+        eMail:
+          type: "string"
+          example: "ord.pharma@dlh.de"
+    DgClassWithATCorPTS:
+      type: "object"
+      properties:
+        class1:
+          type: "boolean"
+          example: true
+        class2:
+          type: "boolean"
+          example: true
+        class3:
+          type: "boolean"
+          example: true
+        class4:
+          type: "boolean"
+          example: true
+        class5:
+          type: "boolean"
+          example: true
+        class6:
+          type: "boolean"
+          example: true
+        class7:
+          type: "boolean"
+          example: true
+        class8:
+          type: "boolean"
+          example: true
+        class9:
+          type: "boolean"
+          example: true
+    GeneralProductInformationExport:
+      type: "object"
+      properties:
+        address:
+          $ref: "#/components/schemas/FullAddress"
+        openingHours:
+          type: "string"
+          example: "7am to 11pm"
+        openforActiveTempControl:
+          type: "boolean"
+          example: true
+        openforPassiveTempSupport:
+          type: "boolean"
+          example: true
+        dgHandling:
+          type: "boolean"
+          example: true
+        handlingContact:
+          $ref: "#/components/schemas/HandlingContact"
+        groundHandlingAgent:
+          $ref: "#/components/schemas/GroundHandlingAgent"
+        generalRemarks:
+          type: "string"
+          example: "Please make sure that customers picking up LCAG equipment or delivering cargo loaded on/in LCAG equipment use trucks equipped with rollers."
+    NonTemperatureControlledGeneralWarehouseExport:
+      type: "object"
+      properties:
+        sizeSqm:
+          type: "string"
+          example: 10000
+        dgClassWithATCorPTS:
+          $ref: "#/components/schemas/DgClassWithATCorPTS"
+        generalRemarks:
+          type: "string"
+          example: null
+    AlarmNotification:
+      type: "object"
+      properties:
+        audioNotification:
+          type: "boolean"
+          example: true
+        visualNotification:
+          type: "boolean"
+          example: true
+        personalNotification:
+          type: "boolean"
+          example: true
+    TemperatureControlledStorageExport:
+      type: "object"
+      properties:
+        storageAvailable:
+          type: "boolean"
+          example: true
+        sizeSqm:
+          type: "string"
+          example: 181
+        dedicatedPharmaSection:
+          type: "boolean"
+          example: true
+        uldStorage:
+          type: "boolean"
+          example: true
+        dgClassWithATCorPTS:
+          $ref: "#/components/schemas/DgClassWithATCorPTS"
+        temperatureMonitoringSystem:
+          type: "boolean"
+          example: true
+        temperatureAlarmSystem:
+          type: "boolean"
+          example: true
+        alarmNotification:
+          $ref: "#/components/schemas/AlarmNotification"
+        temperatureDataRecording:
+          type: "boolean"
+          example: true
+        devicesCalibrated:
+          type: "boolean"
+          example: true
+        temperatureMapped:
+          type: "boolean"
+          example: true
+        generalRemarks:
+          type: "string"
+          example: "PPH pharma room for lose cargo open - in addition 54 ULD MD positions in cooler rooms with adjustable setting between 2-25°C"
+    FrozenRange:
+      type: "object"
+      properties:
+        lessThan0C:
+          type: "boolean"
+          example: true
+        lessThanMinus10C:
+          type: "boolean"
+          example: true
+    TemperatureControlledStorageFrozenExport:
+      type: "object"
+      properties:
+        storageAvailable:
+          type: "boolean"
+          example: true
+        sizeSqm:
+          type: "string"
+          example: 42
+        dedicatedPharmaSection:
+          type: "boolean"
+          example: true
+        uldStorage:
+          type: "boolean"
+          example: false
+        dgClassWithATCorPTS:
+          $ref: "#/components/schemas/DgClassWithATCorPTS"
+        temperatureMonitoringSystem:
+          type: "boolean"
+          example: true
+        temperatureAlarmSystem:
+          type: "boolean"
+          example: true
+        alarmNotification:
+          $ref: "#/components/schemas/AlarmNotification"
+        frozenTemperatureDataRecording:
+          type: "boolean"
+          example: true
+        devicesCalibrated:
+          type: "boolean"
+          example: true
+        temperatureMapped:
+          type: "boolean"
+          example: true
+        frozenRange:
+          $ref: "#/components/schemas/FrozenRange"
+        generalRemarks:
+          type: "string"
+          example: "Door width 142cm (56inch) - Va-Q-tec passive packaging bigger than box cannot be stored in freezer room due its size"
+    TypeDryIce:
+      type: "object"
+      properties:
+        wrapped:
+          type: "boolean"
+          example: true
+        unwrapped:
+          type: "boolean"
+          example: true
+        "10kgBlocks":
+          type: "boolean"
+          example: false
+        "5kgBlocks":
+          type: "boolean"
+          example: true
+        "1to2kgBlocks":
+          type: "boolean"
+          example: false
+    ProtectionAvailableOnTarmac:
+      type: "object"
+      properties:
+        dolliesPalletMoversTrucks:
+          type: "boolean"
+          example: false
+        thermalBlankets:
+          type: "boolean"
+          example: false
+    FeatureExport:
+      type: "object"
+      properties:
+        backupFacilities:
+          type: "boolean"
+          example: false
+        dollies:
+          type: "boolean"
+          example: true
+        slavePallets:
+          type: "boolean"
+          example: true
+        rollerbeds:
+          type: "boolean"
+          example: true
+        dryIce:
+          type: "boolean"
+        typeDryIce:
+          $ref: "#/components/schemas/TypeDryIce"
+        dryIceOnStock:
+          type: "boolean"
+          example: true
+        dryIceWithin24h:
+          type: "boolean"
+          example: true
+        dCellBatteries:
+          type: "boolean"
+          example: true
+        dCellBatteriesWithin24h:
+          type: "boolean"
+          example: true
+        noOfPowerOutlets:
+          type: "string"
+          example: 98
+        secureShipmentInArea:
+          type: "boolean"
+          example: true
+        protectionAvailableonTarmac:
+          $ref: "#/components/schemas/ProtectionAvailableOnTarmac"
+        generalRemarks:
+          type: "string"
+          example: "Re-icing of export or transit passive shipment not possible must be arranged by customer - contact ORD for more details"
+    ContainerTypesExport:
+      type: "object"
+      properties:
+        opticoolerRap:
+          type: "string"
+          example: 25
+        opticoolerRkn:
+          type: "string"
+          example: 17
+        unicoolerRap:
+          type: "string"
+          example: 25
+        unicoolerRkn:
+          type: "string"
+          example: 17
+        envirotainerT2Rap:
+          type: "string"
+          example: 25
+        envirotainerT2Rkn:
+          type: "string"
+          example: 17
+        envirotainerE2Rap:
+          type: "string"
+          example: 25
+        envirotainerE1Rkn:
+          type: "string"
+          example: 17
+        envirotainerReleyeRlp:
+          type: "string"
+          example: null
+        envirotainerReleyeRap:
+          type: "string"
+          example: null
+        cSafeRkb:
+          type: "string"
+          example: 17
+        cSafeRap:
+          type: "string"
+          example: 25
+        va-Q-tainerEurox:
+          type: "string"
+          example: 0
+        va-Q-tainerUsx:
+          type: "string"
+          example: 0
+        va-Q-tainerXLx:
+          type: "string"
+          example: 0
+        generalRemarks:
+          type: "string"
+          example: "Above numbers are for the dedicated storage with the applicable charging ports Truck equipped with rollers must be used by customers when picking up or delivering RAP cool units - empty and/or full."
+    TemperatureProtection:
+      type: "object"
+      properties:
+        open:
+          type: "boolean"
+          example: false
+        sheltered:
+          type: "boolean"
+          example: false
+        moitored:
+          type: "boolean"
+          example: true
+        controlledAndMonitrored:
+          type: "boolean"
+          example: false
+    ProcessExport:
+      type: "object"
+      properties:
+        breakDownBuildUpService:
+          type: "boolean"
+          example: true
+        breakDownBuildUptemperatureControlled:
+          type: "boolean"
+          example: true
+        preConditioning:
+          type: "boolean"
+          example: true
+        paxInbound:
+          type: "string"
+          example: 120
+        paxOutbound:
+          type: "string"
+          example: 120
+        freighterInbound:
+          type: "string"
+          example: 90
+        freighterOutbound:
+          type: "string"
+          example: 90
+        rfsInbound:
+          type: "string"
+          example: 60
+        rfsOutbound:
+          type: "string"
+          example: 60
+        priorLoadingStorage:
+          type: "string"
+          example: 60
+        uldBreakdownTemperatureProtection20C:
+          $ref: "#/components/schemas/TemperatureProtection"
+        uldBreakdownTemperatureProtection5C:
+          $ref: "#/components/schemas/TemperatureProtection"
+        uldBreakdownTemperatureProtectionDF:
+          $ref: "#/components/schemas/TemperatureProtection"
+        uldBuildupTemperatureProtection20C:
+          $ref: "#/components/schemas/TemperatureProtection"
+        uldBuildupTemperatureProtection5C:
+          $ref: "#/components/schemas/TemperatureProtection"
+        uldBuildupTemperatureProtectionDF:
+          $ref: "#/components/schemas/TemperatureProtection"
+        uldBuildupBreakdownTimes:
+          type: "string"
+          example: null
+        outboundBufferTemperatureProtection20C:
+          $ref: "#/components/schemas/TemperatureProtection"
+        outboundBufferTemperatureProtection5C:
+          $ref: "#/components/schemas/TemperatureProtection"
+        outboundBufferTemperatureProtectionDF:
+          $ref: "#/components/schemas/TemperatureProtection"
+        inboundBufferTemperatureProtection20C:
+          $ref: "#/components/schemas/TemperatureProtection"
+        inboundBufferTemperatureProtection5C:
+          $ref: "#/components/schemas/TemperatureProtection"
+        inboundBufferTemperatureProtectionDF:
+          $ref: "#/components/schemas/TemperatureProtection"
+        warehouseRampsAcceptanceAndDelivery20C:
+          $ref: "#/components/schemas/TemperatureProtection"
+        warehouseRampsAcceptanceAndDelivery5C:
+          $ref: "#/components/schemas/TemperatureProtection"
+        warehouseRampsAcceptanceAndDeliveryDF:
+          $ref: "#/components/schemas/TemperatureProtection"
+        uldBreakdown20C:
+          type: "object"
+          properties:
+            nonTempControlled:
+              type: "string"
+              example: "non temp controled"
+            tempMonitored:
+              type: "string"
+              example: "temp monitored"
+            fullyTempControlled:
+              type: "string"
+              example: "fully temp controled"
+        generalRemarks:
+          type: "string"
+          example: "Build-Up of Cool Active possible. Please contact ORD station for more details - restrictions fees apply."
+    QualityExport:
+      type: "object"
+      properties:
+        staff:
+          type: "boolean"
+          example: true
+        subcontractor:
+          type: "boolean"
+          example: false
+        ghaIso9001:
+          type: "boolean"
+          example: false
+        iataCeiv:
+          type: "boolean"
+          example: true
+        validityOfCeiv:
+          type: "string"
+          example: "2024-02-28T00:00:00.000Z"
+        ceivCertificateNumber:
+          type: "string"
+          example: "CEIV-PIL-21-0285"
+        gdpCompliant:
+          type: "boolean"
+          example: true
+        gdpCertified:
+          type: "boolean"
+          example: null
+        gdpCertificate:
+          type: "object"
+          properties:
+            noCertificate:
+              type: "string"
+              example: "no certificate"
+            whoGdp:
+              type: "string"
+              example: "whogdp"
+            euGdp:
+              type: "string"
+              example: "eugdp"
+        gdpCertificateNo:
+          type: "string"
+          example: null
+        validityGdpCertificate:
+          type: "string"
+          example: null
+        iataTcrCertificate:
+          type: "string"
+          example: "Yes"
+        tapaCertified:
+          type: "string"
+          example: "Yes/No"
+        certifiedRegularAgent:
+          type: "string"
+          example: "Yes/No"
+        coolDolliesTarmacTransport:
+          type: "string"
+          example: "Yes"
+    GeneralProductInformation:
+      type: "object"
+      properties:
+        export:
+          $ref: "#/components/schemas/GeneralProductInformationExport"
+        import:
+          $ref: "#/components/schemas/GeneralProductInformationExport"
+        transit:
+          $ref: "#/components/schemas/GeneralProductInformationExport"
+    NonTemperatureControlledGeneralWarehouse:
+      type: "object"
+      properties:
+        export:
+          $ref: "#/components/schemas/NonTemperatureControlledGeneralWarehouseExport"
+        import:
+          $ref: "#/components/schemas/NonTemperatureControlledGeneralWarehouseExport"
+        transit:
+          $ref: "#/components/schemas/NonTemperatureControlledGeneralWarehouseExport"
+    TemperatureControlledStorage15Cto25C:
+      type: "object"
+      properties:
+        export:
+          $ref: "#/components/schemas/TemperatureControlledStorageExport"
+        import:
+          $ref: "#/components/schemas/TemperatureControlledStorageExport"
+        transit:
+          $ref: "#/components/schemas/TemperatureControlledStorageExport"
+    TemperatureControlledStorage2Cto8C:
+      type: "object"
+      properties:
+        export:
+          $ref: "#/components/schemas/TemperatureControlledStorageExport"
+        import:
+          $ref: "#/components/schemas/TemperatureControlledStorageExport"
+        transit:
+          $ref: "#/components/schemas/TemperatureControlledStorageExport"
+    TemperatureControlledStorageFrozen:
+      type: "object"
+      properties:
+        export:
+          $ref: "#/components/schemas/TemperatureControlledStorageFrozenExport"
+        import:
+          $ref: "#/components/schemas/TemperatureControlledStorageFrozenExport"
+        transit:
+          $ref: "#/components/schemas/TemperatureControlledStorageFrozenExport"
+    ProductFeatures:
+      type: "object"
+      properties:
+        export:
+          $ref: "#/components/schemas/FeatureExport"
+        import:
+          $ref: "#/components/schemas/FeatureExport"
+        transit:
+          $ref: "#/components/schemas/FeatureExport"
+    ContainerTypes:
+      type: "object"
+      properties:
+        export:
+          $ref: "#/components/schemas/ContainerTypesExport"
+        import:
+          $ref: "#/components/schemas/ContainerTypesExport"
+        transit:
+          $ref: "#/components/schemas/ContainerTypesExport"
+    Process:
+      type: "object"
+      properties:
+        export:
+          $ref: "#/components/schemas/ProcessExport"
+        import:
+          $ref: "#/components/schemas/ProcessExport"
+        transit:
+          $ref: "#/components/schemas/ProcessExport"
+    Quality:
+      type: "object"
+      properties:
+        export:
+          $ref: "#/components/schemas/QualityExport"
+    ProductsStation:
+      type: "object"
+      properties:
+        code:
+          type: "string"
+          example: "ORD"
+        name:
+          type: "string"
+          example: "CHICAGO O'HARE INTERNATIONAL AIRPOR"
+        products:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ProductCooling"
+    ProductCooling:
+      type: "object"
+      properties:
+        category:
+          type: "string"
+          example: "Active Temp Control & Passive Temp Support"
+        productDetails:
+          type: "object"
+          properties:
+            generalProductInformation:
+              $ref: "#/components/schemas/GeneralProductInformation"
+            nonTemperatureControlledGeneralWarehouse:
+              $ref: "#/components/schemas/NonTemperatureControlledGeneralWarehouse"
+            temperatureControlledStorage+15Cto+25C:
+              $ref: "#/components/schemas/TemperatureControlledStorage15Cto25C"
+            temperatureControlledStorage+2Cto+8C:
+              $ref: "#/components/schemas/TemperatureControlledStorage2Cto8C"
+            temperatureControlledStorageFrozen:
+              $ref: "#/components/schemas/TemperatureControlledStorageFrozen"
+            features:
+              $ref: "#/components/schemas/ProductFeatures"
+            containerTypes:
+              $ref: "#/components/schemas/ContainerTypes"
+            process:
+              $ref: "#/components/schemas/Process"
+            quality:
+              $ref: "#/components/schemas/Quality"
+  securitySchemes:
+    ApiKeyAuth:
+      type: "apiKey"
+      in: "header"
+      name: "apikey"

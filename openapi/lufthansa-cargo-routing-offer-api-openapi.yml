@@ -1,0 +1,225 @@
+---
+openapi: "3.0.0"
+info:
+  version: "1.1 - 2022.04.27"
+  title: "Routing Offer API"
+  description: "Check your product's flight options and timing. Retrieve possible\
+    \ direct and connecting route offers."
+servers:
+- url: "https://api.lufthansa-cargo.com"
+security:
+- ApikeyAuth: []
+paths:
+  /lhcargo/sales/booking/v3/getroutes:
+    get:
+      parameters:
+      - name: "origin"
+        in: "query"
+        description: "Departure airport: 3-letter IATA airport code, e.g. \"FRA\""
+        schema:
+          type: "string"
+          maxLength: 3
+        required: true
+      - name: "destination"
+        in: "query"
+        description: "Arrival airport: 3-letter IATA airport code e.g. \"HKG\""
+        schema:
+          type: "string"
+          maxLength: 3
+        required: true
+      - name: "fromDate"
+        in: "query"
+        description: "Departure date in local time of the departure airport. Based\
+          \ on LAT (Latest Acceptance Time): yyyy-MM-dd"
+        schema:
+          type: "string"
+          format: "date"
+        required: true
+      - name: "productCode"
+        in: "query"
+        description: "Product code for requested service and specials"
+        schema:
+          type: "string"
+          maxLength: 3
+          enum:
+          - "FAN"
+          - "FCO"
+          - "FCP"
+          - "FDG"
+          - "FTF"
+          - "FUN"
+          - "FWN"
+          - "YCO"
+          - "YCP"
+          - "YDG"
+          - "YNB"
+          - "YNZ"
+          - "YTF"
+          - "YUN"
+          - "ZXB"
+          - "ZXF"
+          - "ZXO"
+        required: true
+      - name: "freightersAndTrucksOnly"
+        in: "query"
+        description: "Show freighter and truck connections only"
+        schema:
+          type: "boolean"
+        required: false
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  getRoutesResponse:
+                    $ref: "#/components/schemas/getRoutesResponse"
+              example:
+                getRoutesResponse:
+                  requestID: 1
+                  routeHeaderInformation:
+                    shipmentOrigin: "FRA"
+                    shipmentDestination: "HKG"
+                    earliestLATFromOfferedRoutings: "2022-01-01T11:30:00+01:00"
+                    latestTOAFromOfferedRoutings: "2022-01-15T00:15:00+08:00"
+                    latForLaterFlightSearch: "2022-01-13T20:06:00+01:00"
+                    toaForEarlierFlightSearch: "2022-01-02T19:14:00+08:00"
+                    areOfferSteeringRulesApplied: true
+                    productCode: "YNZ"
+                  routes:
+                  - routeNo: 1
+                    latestAcceptanceTimeOfRouting: "2022-01-01T11:30:00+01:00"
+                    earliestTimeOfAvailabilityOfRouting: "2022-01-03T00:15:00+08:00"
+                    co2EmissionLCAG: 4850.77
+                    FlightSegments:
+                    - flightSegmentNo: 1
+                      flightSegmentOrigin: "FRA"
+                      flightSegmentDestination: "HKG"
+                      flightNumber: "LH8472"
+                      flightOriginDate: "2022-01-01T00:00:00+01:00"
+                      departureDateTimeLocal: "2022-01-01T17:30:00+01:00"
+                      arrivalDatetimeLocal: "2022-01-02T19:15:00+08:00"
+                      aircraftType: "77X"
+                  - routeNo: 2
+                    latestAcceptanceTimeOfRouting: "2022-01-02T12:15:00+01:00"
+                    earliestTimeOfAvailabilityOfRouting: "2022-01-03T22:25:00+08:00"
+                    co2EmissionLCAG: 11300.485
+                    FlightSegments:
+                    - flightSegmentNo: 1
+                      flightSegmentOrigin: "FRA"
+                      flightSegmentDestination: "HKG"
+                      flightNumber: "LH796"
+                      flightOriginDate: "2022-01-02T00:00:00+01:00"
+                      departureDateTimeLocal: "2022-01-02T18:15:00+01:00"
+                      arrivalDatetimeLocal: "2022-01-03T16:25:00+08:00"
+                      aircraftType: "343"
+                  - routeNo: 3
+                    latestAcceptanceTimeOfRouting: "2022-01-03T14:25:00+01:00"
+                    earliestTimeOfAvailabilityOfRouting: "2022-01-05T00:25:00+08:00"
+                    co2EmissionLCAG: 4661.172
+                    FlightSegments:
+                    - flightSegmentNo: 1
+                      flightSegmentOrigin: "FRA"
+                      flightSegmentDestination: "HKG"
+                      flightNumber: "LH8474"
+                      flightOriginDate: "2022-01-03T00:00:00+01:00"
+                      departureDateTimeLocal: "2022-01-03T20:25:00+01:00"
+                      arrivalDatetimeLocal: "2022-01-04T19:25:00+08:00"
+                      aircraftType: "77X"
+      summary: "Get routing for given origin and destination"
+      tags:
+      - "routes"
+components:
+  securitySchemes:
+    ApikeyAuth:
+      type: "apiKey"
+      in: "header"
+      name: "apikey"
+  schemas:
+    getRoutesResponse:
+      type: "object"
+      required:
+      - "requestID"
+      - "routes"
+      properties:
+        requestID:
+          type: "string"
+          description: "Non-negative integer (starts with 1 and incremented by 1 for\
+            \ each additional request). This attribute is introduced to correlate\
+            \ the request and response"
+        routeHeaderInformation:
+          type: "object"
+          required:
+          - "shipmentOrigin"
+          - "shipmentDestination"
+          - "latForLaterFlightSearch"
+          - "toaForEarlierFlightSearch"
+          - "productCode"
+          properties:
+            shipmentOrigin:
+              type: "string"
+            shipmentDestination:
+              type: "string"
+            earliestLATFromOfferedRoutings:
+              type: "string"
+              description: "Earliest LAT (Latest Acceptance Time) at the shipment\
+                \ origin station considering all routes of the response: YYYY-MM-DDTHH:mm:SSZ"
+            latestTOAFromOfferedRoutings:
+              type: "string"
+              description: "Latest TOA (Latest Acceptance Time) at the shipment destination\
+                \ station considering all routes of the response: YYYY-MM-DDTHH:mm:SSZ"
+            latForLaterFlightSearch:
+              type: "string"
+              description: "In case of later flight search, use this value as fromDate"
+            toaForEarlierFlightSearch:
+              type: "string"
+              description: "In case of later flight search, use this value as fromDate"
+            productCode:
+              type: "string"
+              description: "Unique 3-Letter Code to identify a Lufthansa Cargo product"
+        routes:
+          type: "array"
+          required:
+          - "routeNo"
+          - "latestAcceptanceTimeOfRouting"
+          - "earliestTimeOfAvailabilityOfRouting"
+          - "FlightSegments"
+          items:
+            properties:
+              routeNo:
+                type: "number"
+              latestAcceptanceTimeOfRouting:
+                type: "string"
+                format: "date-time"
+              earliestTimeOfAvailabilityOfRouting:
+                type: "string"
+                format: "date-time"
+              co2EmissionLCAG:
+                type: "number"
+                format: "float"
+              FlightSegments:
+                $ref: "#/components/schemas/FlightSegments"
+    FlightSegments:
+      type: "array"
+      items:
+        properties:
+          flightSegmentNo:
+            type: "number"
+          flightSegmentOrigin:
+            type: "string"
+          flightSegmentDestination:
+            type: "string"
+          flightNumber:
+            type: "string"
+          flightOriginDate:
+            type: "string"
+          departureDateTimeLocal:
+            type: "string"
+            format: "date-time"
+          arrivalDatetimeLocal:
+            type: "string"
+            format: "date-time"
+          aircraftType:
+            type: "string"
