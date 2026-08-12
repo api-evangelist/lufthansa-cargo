@@ -282,8 +282,6 @@ common:
     url: https://developer.lufthansa-cargo.com/terms
   - type: Support
     url: https://developer.lufthansa-cargo.com/contact
-  - type: Email
-    url: apisupport.lcag@dlh.de
   - type: ChangeLog
     url: https://developer.lufthansa-cargo.com/news
   - type: SignUp
