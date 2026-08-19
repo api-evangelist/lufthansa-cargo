@@ -1,0 +1,1472 @@
+{
+  "item": [
+    {
+      "id": "2671f540-86e4-4c1b-b8e4-768ca8db7854",
+      "name": "Shipment Tracking Subscribe",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "de44a834-8056-4b9d-ae32-0ca9182f4b94",
+          "name": "Get all subscriptions for a given callback",
+          "request": {
+            "name": "Get all subscriptions for a given callback",
+            "description": {},
+            "url": {
+              "path": [
+                "lhcargo",
+                "handling",
+                "shipmenttrackingpush",
+                "v4",
+                "subscribe",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "callback",
+                  "value": "<uri>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "038453d6-cec1-44cc-ba8e-4b1a5ec4920d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callback",
+                      "value": "https://yoursoftwaresolution.com/lufthansacargo/trackingCallback"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"70904e8c-f953-4ef5-b9f4-6c34711cf801\",\n  \"70904e8c-f953-4ef5-b9f4-6c34711cf801\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e609b272-ccac-47f5-b38f-3ecaa932bfc3",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callback",
+                      "value": "https://yoursoftwaresolution.com/lufthansacargo/trackingCallback"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d28c217-6b8c-4935-af78-72b25986e81d",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callback",
+                      "value": "https://yoursoftwaresolution.com/lufthansacargo/trackingCallback"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a77c15d0-1988-4ff8-8b41-6ea406bf88d5",
+          "name": "Create subscription for AWB",
+          "request": {
+            "name": "Create subscription for AWB",
+            "description": {},
+            "url": {
+              "path": [
+                "lhcargo",
+                "handling",
+                "shipmenttrackingpush",
+                "v4",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"awb\": \"<string>\",\n  \"callback\": \"<uri>\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "331842eb-50cc-4e1a-b6fa-b60a22fd1b88",
+              "name": "Subscription created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"subscriptionId\": \"70904e8c-f953-4ef5-b9f4-6c34711cf801\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "677adb5d-6533-4ee0-a67a-79f8fdbf6f4f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "88058faa-ca57-4001-9774-ca939761f914",
+              "name": "Callback host disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fc39f5b8-2bfd-4afd-9ca5-072548260c04",
+              "name": "Callback host not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a145d0d-fdca-4cf2-957a-f269831bca35",
+              "name": "Shipment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "31e047f7-ddce-4845-968f-daed532f3825",
+              "name": "Subscription already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "389b0453-d8b1-4109-8008-ee22c4589bb8",
+              "name": "Callback is invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a142eaa-c372-40db-b797-661e3559fdc8",
+              "name": "Callback not reachable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Failed Dependency (WebDAV) (RFC 4918)",
+              "code": 424,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7c2be370-9c2c-4267-a9a9-e81b364d2382",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9788fc90-342d-433f-8743-2bf2c387f719",
+          "name": "Delete subscription",
+          "request": {
+            "name": "Delete subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "lhcargo",
+                "handling",
+                "shipmenttrackingpush",
+                "v4",
+                "subscribe",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "915cfcbc-e77d-49fd-b254-97b2f709c54a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d64fa8a-9257-4a0b-9c78-17d85e78af63",
+              "name": "Subscription not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d24d36f0-162c-41b0-9ccb-d01e7837dfcf",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61736f52-c7db-469b-8a44-4142aebd68e8",
+          "name": "Get subscription",
+          "request": {
+            "name": "Get subscription",
+            "description": {
+              "content": "Get the details of an existing subscription",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lhcargo",
+                "handling",
+                "shipmenttrackingpush",
+                "v4",
+                "subscribe",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea89e51b-261f-41ce-be4c-968709017373",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"subscriptionId\": \"70904e8c-f953-4ef5-b9f4-6c34711cf801\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b99ed304-7e69-4534-b9bc-64c1a934bfde",
+              "name": "Subscription not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4cc0257e-a639-46e9-a758-74a62f47a95d",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a4bb3f9-51a2-4dd2-8429-e2dd58b26fd2",
+          "name": "Update subscription",
+          "request": {
+            "name": "Update subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "lhcargo",
+                "handling",
+                "shipmenttrackingpush",
+                "v4",
+                "subscribe",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"awb\": \"<string>\",\n  \"callback\": \"<uri>\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9568211-fd89-4760-8e8d-6a727f35cf54",
+              "name": "Subscription updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"subscriptionId\": \"70904e8c-f953-4ef5-b9f4-6c34711cf801\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "833b8bbc-0b00-45fb-911f-8b58c7b46036",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7b18c272-75ea-4f3d-b857-4db36271a0b3",
+              "name": "Subscription not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67161a28-53ac-4c8f-8b91-4c350abe07e3",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttrackingpush",
+                    "v4",
+                    "subscribe",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"awb\": \"020-12345678\",\n  \"callback\": \"https://yoursoftwaresolution.com/lufthansacargo/trackingCallback\",\n  \"states\": \"<string>\",\n  \"businessPartnerNumber\": \"987654321\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.lufthansa-cargo.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1c81a3ba-0d72-4784-9c6e-665e322af397",
+    "name": "Shipment Tracking Subscribe API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Receive automatic updates on the status of a shipment. Subscribe for a selected AWB and every time the shipment reaches a new milestone get automatically notified via the API.",
+      "type": "text/plain"
+    }
+  }
+}

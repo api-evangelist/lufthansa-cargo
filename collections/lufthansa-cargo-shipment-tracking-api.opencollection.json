@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shipment Tracking API",
+    "version": "1.0 - 2022.01.03"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipment Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get actual status of shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lufthansa-cargo.com/lhcargo/handling/shipmenttracking/v4/shipment",
+            "params": [
+              {
+                "name": "aWBPrefix",
+                "value": "",
+                "type": "query",
+                "description": "Represents the airline that is the owner of this AWB, i.e. \"020\" = Lufthansa Cargo"
+              },
+              {
+                "name": "aWBNumber",
+                "value": "",
+                "type": "query",
+                "description": "The Air Waybill Number (AWB)"
+              }
+            ]
+          },
+          "docs": "Get actual status of shipment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

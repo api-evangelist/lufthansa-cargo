@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Station Information API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "stations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all station codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lufthansa-cargo.com/lhcargo/handling/stations/v1/codes"
+          },
+          "docs": "Receive a list of all stations"
+        },
+        {
+          "info": {
+            "name": "Get detail of the stations in the request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lufthansa-cargo.com/lhcargo/handling/stations/v1/station",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Receive a list of station details"
+        },
+        {
+          "info": {
+            "name": "Get station details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lufthansa-cargo.com/lhcargo/handling/stations/v1/station/:IATACode",
+            "params": [
+              {
+                "name": "IATACode",
+                "value": "",
+                "type": "path",
+                "description": "IATACode"
+              }
+            ]
+          },
+          "docs": "get information for one station"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

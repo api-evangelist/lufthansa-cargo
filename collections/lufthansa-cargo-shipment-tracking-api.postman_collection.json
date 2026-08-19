@@ -1,0 +1,154 @@
+{
+  "item": [
+    {
+      "id": "f28aaf53-8b1d-4cbd-8c16-f69344d791ef",
+      "name": "Shipment Tracking",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "889e843b-633a-4092-8558-f359b836d91b",
+          "name": "Get actual status of shipment",
+          "request": {
+            "name": "Get actual status of shipment",
+            "description": {},
+            "url": {
+              "path": [
+                "lhcargo",
+                "handling",
+                "shipmenttracking",
+                "v4",
+                "shipment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "aWBPrefix",
+                  "value": "<string>",
+                  "description": "(Required) Represents the airline that is the owner of this AWB, i.e. \"020\" = Lufthansa Cargo"
+                },
+                {
+                  "disabled": false,
+                  "key": "aWBNumber",
+                  "value": "<string>",
+                  "description": "(Required) The Air Waybill Number (AWB)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55c66114-5071-476c-b851-5c0540b62f52",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "shipmenttracking",
+                    "v4",
+                    "shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "aWBPrefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aWBNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipmentTrackingStatus\": {\n    \"milestonePlan\": {\n      \"version\": \"string\",\n      \"milestones\": {\n        \"milestone\": [\n          {\n            \"type\": \"string\",\n            \"station\": \"string\",\n            \"plannedTime\": \"1963-11-19T16:18:57.830Z\",\n            \"actualTime\": \"1997-10-07T20:07:05.399Z\",\n            \"plannedTotals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"actualTotals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flight\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"events\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": \"string\",\n            \"station\": \"string\",\n            \"plannedTime\": \"2002-09-06T09:43:12.002Z\",\n            \"actualTime\": \"2013-10-19T17:44:15.375Z\",\n            \"plannedTotals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"actualTotals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"flight\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"events\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"booking\": {\n      \"product\": {\n        \"productName\": \"string\",\n        \"productConditions\": {\n          \"sPLList\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"productCode\": \"string\"\n        }\n      },\n      \"bookingTime\": \"1972-11-09T11:21:18.610Z\",\n      \"isSplitBooking\": \"string\",\n      \"totals\": {\n        \"noOfPieces\": \"string\",\n        \"weight\": 5121.639539505103\n      },\n      \"originalTimeFrame\": {\n        \"lAT\": \"1980-11-14T09:55:32.095Z\",\n        \"tOA\": \"1996-05-07T19:57:53.876Z\"\n      },\n      \"origin\": \"string\",\n      \"destination\": \"string\",\n      \"confirmationStatus\": \"string\"\n    },\n    \"events\": {\n      \"event\": [\n        {\n          \"type\": \"string\",\n          \"station\": \"string\",\n          \"actualTime\": \"1947-06-13T05:54:54.255Z\",\n          \"actualTotals\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"string\",\n          \"classifier\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"station\": \"string\",\n          \"actualTime\": \"1972-04-20T14:04:20.418Z\",\n          \"actualTotals\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"category\": \"string\",\n          \"classifier\": \"string\"\n        }\n      ]\n    },\n    \"shipmentStatusEvents\": {\n      \"event\": [\n        {\n          \"category\": \"string\",\n          \"type\": \"string\",\n          \"station\": \"string\",\n          \"flight\": {\n            \"flightCarrierCode\": \"string\",\n            \"flightNumber\": \"string\",\n            \"flightDate\": \"2017-04-27\",\n            \"flightSegmentOrigin\": \"string\",\n            \"flightSegmentDestination\": \"string\"\n          }\n        },\n        {\n          \"category\": \"string\",\n          \"type\": \"string\",\n          \"station\": \"string\",\n          \"flight\": {\n            \"flightCarrierCode\": \"string\",\n            \"flightNumber\": \"string\",\n            \"flightDate\": \"1988-09-10\",\n            \"flightSegmentOrigin\": \"string\",\n            \"flightSegmentDestination\": \"string\"\n          }\n        }\n      ]\n    },\n    \"shipment\": {\n      \"shipmentId\": {\n        \"carrierNumericCode\": \"string\",\n        \"aWBNumber\": \"string\",\n        \"isAWBNoCheckDigitUsed\": \"string\",\n        \"closeDateAndTime\": \"1994-08-01T01:37:04.716Z\",\n        \"aWBSequenceNumber\": 3562,\n        \"revisionNo\": 4323\n      },\n      \"awbIssueStation\": \"string\"\n    },\n    \"status\": \"st\",\n    \"efreightDetails\": {\n      \"preCheckStatus\": {\n        \"precheckStatusCode\": \"string\",\n        \"precheckStatusDescription\": \"string\",\n        \"precheckTime\": \"2018-02-15T18:08:00.628Z\",\n        \"precheckTimeUTC\": \"1974-02-08T00:52:18.845Z\"\n      }\n    },\n    \"flightMovementDetails\": {\n      \"flightCarrierCode\": \"string\",\n      \"flightNumber\": \"string\",\n      \"flightDate\": \"1982-12-25\",\n      \"eta\": \"1948-12-28T22:18:18.687Z\",\n      \"etaUTC\": \"1970-01-05T10:04:37.728Z\",\n      \"flightEventInformation\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.lufthansa-cargo.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "052257cf-3b9c-4c88-b663-561c09b216f2",
+    "name": "Shipment Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Track shipments easily with this Shipment Tracking API. It enables retrieval of the current shipment status while providing maximum transparency and reliability.",
+      "type": "text/plain"
+    }
+  }
+}

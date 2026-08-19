@@ -1,0 +1,184 @@
+{
+  "item": [
+    {
+      "id": "9df63b65-1855-4d76-9655-c2122624af1d",
+      "name": "routes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "36f2c006-f8af-43eb-ae0f-f94b17af78de",
+          "name": "Get routing for given origin and destination",
+          "request": {
+            "name": "Get routing for given origin and destination",
+            "description": {},
+            "url": {
+              "path": [
+                "lhcargo",
+                "sales",
+                "booking",
+                "v3",
+                "getroutes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "origin",
+                  "value": "<string>",
+                  "description": "(Required) Departure airport: 3-letter IATA airport code, e.g. \"FRA\""
+                },
+                {
+                  "disabled": false,
+                  "key": "destination",
+                  "value": "<string>",
+                  "description": "(Required) Arrival airport: 3-letter IATA airport code e.g. \"HKG\""
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) Departure date in local time of the departure airport. Based on LAT (Latest Acceptance Time): yyyy-MM-dd"
+                },
+                {
+                  "disabled": false,
+                  "key": "productCode",
+                  "value": "<string>",
+                  "description": "(Required) Product code for requested service and specials"
+                },
+                {
+                  "disabled": false,
+                  "key": "freightersAndTrucksOnly",
+                  "value": "<boolean>",
+                  "description": "Show freighter and truck connections only"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33f4e691-f806-4b76-aa75-d785ab720c2d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "sales",
+                    "booking",
+                    "v3",
+                    "getroutes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "origin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destination",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "productCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "freightersAndTrucksOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"getRoutesResponse\": {\n    \"requestID\": 1,\n    \"routeHeaderInformation\": {\n      \"shipmentOrigin\": \"FRA\",\n      \"shipmentDestination\": \"HKG\",\n      \"earliestLATFromOfferedRoutings\": \"2022-01-01T11:30:00+01:00\",\n      \"latestTOAFromOfferedRoutings\": \"2022-01-15T00:15:00+08:00\",\n      \"latForLaterFlightSearch\": \"2022-01-13T20:06:00+01:00\",\n      \"toaForEarlierFlightSearch\": \"2022-01-02T19:14:00+08:00\",\n      \"areOfferSteeringRulesApplied\": true,\n      \"productCode\": \"YNZ\"\n    },\n    \"routes\": [\n      {\n        \"routeNo\": 1,\n        \"latestAcceptanceTimeOfRouting\": \"2022-01-01T11:30:00+01:00\",\n        \"earliestTimeOfAvailabilityOfRouting\": \"2022-01-03T00:15:00+08:00\",\n        \"co2EmissionLCAG\": 4850.77,\n        \"FlightSegments\": [\n          {\n            \"flightSegmentNo\": 1,\n            \"flightSegmentOrigin\": \"FRA\",\n            \"flightSegmentDestination\": \"HKG\",\n            \"flightNumber\": \"LH8472\",\n            \"flightOriginDate\": \"2022-01-01T00:00:00+01:00\",\n            \"departureDateTimeLocal\": \"2022-01-01T17:30:00+01:00\",\n            \"arrivalDatetimeLocal\": \"2022-01-02T19:15:00+08:00\",\n            \"aircraftType\": \"77X\"\n          }\n        ]\n      },\n      {\n        \"routeNo\": 2,\n        \"latestAcceptanceTimeOfRouting\": \"2022-01-02T12:15:00+01:00\",\n        \"earliestTimeOfAvailabilityOfRouting\": \"2022-01-03T22:25:00+08:00\",\n        \"co2EmissionLCAG\": 11300.485,\n        \"FlightSegments\": [\n          {\n            \"flightSegmentNo\": 1,\n            \"flightSegmentOrigin\": \"FRA\",\n            \"flightSegmentDestination\": \"HKG\",\n            \"flightNumber\": \"LH796\",\n            \"flightOriginDate\": \"2022-01-02T00:00:00+01:00\",\n            \"departureDateTimeLocal\": \"2022-01-02T18:15:00+01:00\",\n            \"arrivalDatetimeLocal\": \"2022-01-03T16:25:00+08:00\",\n            \"aircraftType\": \"343\"\n          }\n        ]\n      },\n      {\n        \"routeNo\": 3,\n        \"latestAcceptanceTimeOfRouting\": \"2022-01-03T14:25:00+01:00\",\n        \"earliestTimeOfAvailabilityOfRouting\": \"2022-01-05T00:25:00+08:00\",\n        \"co2EmissionLCAG\": 4661.172,\n        \"FlightSegments\": [\n          {\n            \"flightSegmentNo\": 1,\n            \"flightSegmentOrigin\": \"FRA\",\n            \"flightSegmentDestination\": \"HKG\",\n            \"flightNumber\": \"LH8474\",\n            \"flightOriginDate\": \"2022-01-03T00:00:00+01:00\",\n            \"departureDateTimeLocal\": \"2022-01-03T20:25:00+01:00\",\n            \"arrivalDatetimeLocal\": \"2022-01-04T19:25:00+08:00\",\n            \"aircraftType\": \"77X\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.lufthansa-cargo.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "346da8de-7fbd-476c-8f30-36b60d7dd316",
+    "name": "Routing Offer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Check your product's flight options and timing. Retrieve possible direct and connecting route offers.",
+      "type": "text/plain"
+    }
+  }
+}

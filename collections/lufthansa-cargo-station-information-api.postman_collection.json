@@ -1,0 +1,1044 @@
+{
+  "item": [
+    {
+      "id": "f6fb448f-0f34-4888-90fa-9992f8247c50",
+      "name": "stations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b84f3328-22c5-4ce1-a4eb-9090f5500cd8",
+          "name": "Get a list of all station codes",
+          "request": {
+            "name": "Get a list of all station codes",
+            "description": {
+              "content": "Receive a list of all stations",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lhcargo",
+                "handling",
+                "stations",
+                "v1",
+                "codes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f9afb5c-7dd7-450a-85f7-6bbeefd8204d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"ORD\",\n  \"ORD\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d64bb11-2356-422c-ba9c-379e9952c518",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d369fd9-0be7-4089-873e-e75352482c6e",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e4c8f49-3fa3-4107-aee7-2e18efb19d08",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83f3b6d3-7472-4592-a649-040bc49344a5",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49daa985-f5fb-4e9a-bf71-2a52ca68d5d5",
+          "name": "Get detail of the stations in the request",
+          "request": {
+            "name": "Get detail of the stations in the request",
+            "description": {
+              "content": "Receive a list of station details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lhcargo",
+                "handling",
+                "stations",
+                "v1",
+                "station"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stationCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "81144c03-ebea-452e-ad69-cc439e8150d1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stationCodes\": [\n    \"ORD\",\n    \"ORD\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"code\": \"ORD\",\n    \"name\": \"CHICAGO O'HARE INTERNATIONAL AIRPORT\",\n    \"freighterHandling\": true,\n    \"passengerAircraftHandling\": true,\n    \"truckHandling\": true,\n    \"countryShort\": \"US\",\n    \"countryLong\": \"United States\",\n    \"import\": {\n      \"address\": {\n        \"street\": \"South Access Rd.\",\n        \"streetNo\": \"string\",\n        \"building\": \"Bldg 616\",\n        \"zipCode\": \"string\",\n        \"city\": \"Chicago, IL\"\n      },\n      \"contact\": {\n        \"generalEmail\": \"string\",\n        \"generalPhone\": \"string\",\n        \"handlingEmail\": \"ordimport@dlh.de\",\n        \"handlingPhone\": \"string\"\n      },\n      \"firmsCode\": \"E821\",\n      \"ciscFee\": \"string\",\n      \"storage\": \"string\",\n      \"extraComment\": \"string\",\n      \"openingHours\": [\n        {\n          \"day\": \"WEDNESDAY\",\n          \"hours\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"day\": \"MONDAY\",\n          \"hours\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"export\": {\n      \"address\": {\n        \"street\": \"South Access Rd.\",\n        \"streetNo\": \"string\",\n        \"building\": \"Bldg 616\",\n        \"zipCode\": \"string\",\n        \"city\": \"Chicago, IL\"\n      },\n      \"contact\": {\n        \"generalEmail\": \"string\",\n        \"generalPhone\": \"string\",\n        \"handlingEmail\": \"ordimport@dlh.de\",\n        \"handlingPhone\": \"string\"\n      },\n      \"openingHours\": [\n        {\n          \"day\": \"SATURDAY\",\n          \"hours\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"day\": \"THURSDAY\",\n          \"hours\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    }\n  },\n  {\n    \"code\": \"ORD\",\n    \"name\": \"CHICAGO O'HARE INTERNATIONAL AIRPORT\",\n    \"freighterHandling\": true,\n    \"passengerAircraftHandling\": true,\n    \"truckHandling\": true,\n    \"countryShort\": \"US\",\n    \"countryLong\": \"United States\",\n    \"import\": {\n      \"address\": {\n        \"street\": \"South Access Rd.\",\n        \"streetNo\": \"string\",\n        \"building\": \"Bldg 616\",\n        \"zipCode\": \"string\",\n        \"city\": \"Chicago, IL\"\n      },\n      \"contact\": {\n        \"generalEmail\": \"string\",\n        \"generalPhone\": \"string\",\n        \"handlingEmail\": \"ordimport@dlh.de\",\n        \"handlingPhone\": \"string\"\n      },\n      \"firmsCode\": \"E821\",\n      \"ciscFee\": \"string\",\n      \"storage\": \"string\",\n      \"extraComment\": \"string\",\n      \"openingHours\": [\n        {\n          \"day\": \"THURSDAY\",\n          \"hours\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"day\": \"THURSDAY\",\n          \"hours\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"export\": {\n      \"address\": {\n        \"street\": \"South Access Rd.\",\n        \"streetNo\": \"string\",\n        \"building\": \"Bldg 616\",\n        \"zipCode\": \"string\",\n        \"city\": \"Chicago, IL\"\n      },\n      \"contact\": {\n        \"generalEmail\": \"string\",\n        \"generalPhone\": \"string\",\n        \"handlingEmail\": \"ordimport@dlh.de\",\n        \"handlingPhone\": \"string\"\n      },\n      \"openingHours\": [\n        {\n          \"day\": \"SATURDAY\",\n          \"hours\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"day\": \"SUNDAY\",\n          \"hours\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5e25416-ea32-4508-a1f4-dfe812f4aacc",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stationCodes\": [\n    \"ORD\",\n    \"ORD\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe8bb74b-da36-4458-b475-796b158406bb",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stationCodes\": [\n    \"ORD\",\n    \"ORD\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0201c497-9bd5-4802-9e75-11913e8cd583",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stationCodes\": [\n    \"ORD\",\n    \"ORD\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13a0b99e-46c2-4d9b-84ae-9460b6cb243d",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stationCodes\": [\n    \"ORD\",\n    \"ORD\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf012caf-1656-41a5-85a6-0c54c1900cca",
+          "name": "Get station details",
+          "request": {
+            "name": "Get station details",
+            "description": {
+              "content": "get information for one station",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lhcargo",
+                "handling",
+                "stations",
+                "v1",
+                "station",
+                ":IATACode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "IATACode",
+                  "description": "(Required) IATACode"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0dd3f04c-3f7e-4318-9db8-fb9ef32a2a4b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station",
+                    ":IATACode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "IATACode",
+                      "description": "(Required) IATACode"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"ORD\",\n  \"name\": \"CHICAGO O'HARE INTERNATIONAL AIRPORT\",\n  \"freighterHandling\": true,\n  \"passengerAircraftHandling\": true,\n  \"truckHandling\": true,\n  \"countryShort\": \"US\",\n  \"countryLong\": \"United States\",\n  \"import\": {\n    \"address\": {\n      \"street\": \"South Access Rd.\",\n      \"streetNo\": \"string\",\n      \"building\": \"Bldg 616\",\n      \"zipCode\": \"string\",\n      \"city\": \"Chicago, IL\"\n    },\n    \"contact\": {\n      \"generalEmail\": \"string\",\n      \"generalPhone\": \"string\",\n      \"handlingEmail\": \"ordimport@dlh.de\",\n      \"handlingPhone\": \"string\"\n    },\n    \"firmsCode\": \"E821\",\n    \"ciscFee\": \"string\",\n    \"storage\": \"string\",\n    \"extraComment\": \"string\",\n    \"openingHours\": [\n      {\n        \"day\": \"FRIDAY\",\n        \"hours\": [\n          {\n            \"open\": \"07:00:00\",\n            \"close\": \"17:00:00\"\n          },\n          {\n            \"open\": \"07:00:00\",\n            \"close\": \"17:00:00\"\n          }\n        ]\n      },\n      {\n        \"day\": \"SUNDAY\",\n        \"hours\": [\n          {\n            \"open\": \"07:00:00\",\n            \"close\": \"17:00:00\"\n          },\n          {\n            \"open\": \"07:00:00\",\n            \"close\": \"17:00:00\"\n          }\n        ]\n      }\n    ]\n  },\n  \"export\": {\n    \"address\": {\n      \"street\": \"South Access Rd.\",\n      \"streetNo\": \"string\",\n      \"building\": \"Bldg 616\",\n      \"zipCode\": \"string\",\n      \"city\": \"Chicago, IL\"\n    },\n    \"contact\": {\n      \"generalEmail\": \"string\",\n      \"generalPhone\": \"string\",\n      \"handlingEmail\": \"ordimport@dlh.de\",\n      \"handlingPhone\": \"string\"\n    },\n    \"openingHours\": [\n      {\n        \"day\": \"THURSDAY\",\n        \"hours\": [\n          {\n            \"open\": \"07:00:00\",\n            \"close\": \"17:00:00\"\n          },\n          {\n            \"open\": \"07:00:00\",\n            \"close\": \"17:00:00\"\n          }\n        ]\n      },\n      {\n        \"day\": \"MONDAY\",\n        \"hours\": [\n          {\n            \"open\": \"07:00:00\",\n            \"close\": \"17:00:00\"\n          },\n          {\n            \"open\": \"07:00:00\",\n            \"close\": \"17:00:00\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f77e0a9-cfc0-49f1-91d7-75734b19ae54",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station",
+                    ":IATACode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "IATACode",
+                      "description": "(Required) IATACode"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ee8bf84-1887-401a-b8d9-74a427ee5930",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station",
+                    ":IATACode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "IATACode",
+                      "description": "(Required) IATACode"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72d8041c-93fc-429b-9e18-dfa3f6432f04",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station",
+                    ":IATACode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "IATACode",
+                      "description": "(Required) IATACode"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e62feeb-59df-433d-a358-7db014e56411",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station",
+                    ":IATACode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "IATACode",
+                      "description": "(Required) IATACode"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a66856de-97dd-4e15-8737-9091a19f596a",
+              "name": "generic error respoonse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lhcargo",
+                    "handling",
+                    "stations",
+                    "v1",
+                    "station",
+                    ":IATACode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "IATACode",
+                      "description": "(Required) IATACode"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5626,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8318ce23-e52b-489d-b526-2c03387dd20c",
+      "name": "products",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.lufthansa-cargo.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aafaaa93-5004-4265-a5f5-1c0038a83fe0",
+    "name": "Station Information API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access station information and receive details such as opening hours, export‑ and import‑relevant information, addresses, and additional operational data for Lufthansa Cargo stations worldwide.\n\nContact Support:\n Email: apisupport.lcag@dlh.de",
+      "type": "text/plain"
+    }
+  }
+}

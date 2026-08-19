@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shipment Tracking Subscribe API",
+    "version": "1.0 - 2022.01.03"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipment Tracking Subscribe",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all subscriptions for a given callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lufthansa-cargo.com/lhcargo/handling/shipmenttrackingpush/v4/subscribe/all",
+            "params": [
+              {
+                "name": "callback",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all subscriptions for a given callback"
+        },
+        {
+          "info": {
+            "name": "Create subscription for AWB",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lufthansa-cargo.com/lhcargo/handling/shipmenttrackingpush/v4/subscribe",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create subscription for AWB"
+        },
+        {
+          "info": {
+            "name": "Get subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lufthansa-cargo.com/lhcargo/handling/shipmenttrackingpush/v4/subscribe/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the details of an existing subscription"
+        },
+        {
+          "info": {
+            "name": "Update subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.lufthansa-cargo.com/lhcargo/handling/shipmenttrackingpush/v4/subscribe/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update subscription"
+        },
+        {
+          "info": {
+            "name": "Delete subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.lufthansa-cargo.com/lhcargo/handling/shipmenttrackingpush/v4/subscribe/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete subscription"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
