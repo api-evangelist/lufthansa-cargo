@@ -87,6 +87,12 @@ apis:
     humanURL: https://developer.lufthansa-cargo.com/apis/shipmenttrackingsubscribepublic
     baseURL: https://api.lufthansa-cargo.com
     tags:
+      - Webhook
+      - Track and Trace
+      - Air Cargo
+      - Event
+      - Air Waybill
+    tags_raw:
       - Webhooks
       - Track and Trace
       - Air Cargo
