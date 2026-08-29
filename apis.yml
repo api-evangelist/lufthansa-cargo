@@ -24,6 +24,18 @@ description: >-
   the portfolio as gated products and IATA ONE Record went live in July 2026
   through the IBS Software ONE Record server rather than as anything Lufthansa
   Cargo publishes itself.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: application-approval
