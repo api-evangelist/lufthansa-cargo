@@ -1,0 +1,35 @@
+slug: lufthansa-cargo
+provider: Lufthansa Cargo
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Shipment Tracking
+  spec_file: lufthansa-cargo-shipment-tracking-api-openapi.yml
+  capability_id: BC-2510.20
+  capability_id_l1: BC-2510
+  capability_name: Shipment Tracking Management
+  confidence: 0.93
+  evidence: '"Track shipments easily with this Shipment Tracking API. It enables retrieval of the current
+    shipment status"; Get actual status of shipment; schemas shipmentStatusEvents, milestonePlan'
+  reason: Retrieval of current air shipment status across milestones and flight movements is shipment
+    tracking / status resolution.
+- tag: Shipment Tracking Subscribe
+  spec_file: lufthansa-cargo-shipment-tracking-subscribe-api-openapi.yml
+  capability_id: BC-2510.10
+  capability_id_l1: BC-2510
+  capability_name: Event Capture and Status Management
+  confidence: 0.8
+  evidence: '"Subscribe for a selected AWB and every time the shipment reaches a new milestone get automatically
+    notified"; schemas ShipmentStatusUpdate, Subscription'
+  reason: Although subscription management is plumbing-like, the payload is shipment milestone event delivery
+    for AWBs, i.e. event capture and status notification within shipment visibility.

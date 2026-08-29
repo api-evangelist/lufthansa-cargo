@@ -263,6 +263,9 @@ apis:
   - type: Documentation
     url: https://developer.lufthansa-cargo.com/apis/stationinformationpublic
 common:
+  - type: CapabilityMap
+    url: capabilities/lufthansa-cargo-capability-edges.yml
+    name: Lufthansa Cargo Business Capability Map
   - type: Website
     url: https://www.lufthansa-cargo.com/
   - type: DeveloperPortal
