@@ -236,6 +236,8 @@ apis:
   humanURL: https://developer.lufthansa-cargo.com/apis/shipmenttrackingpublic
   baseURL: https://api.lufthansa-cargo.com
   tags:
+  - Routes
+  tags_raw:
   - routes
   properties:
   - type: OpenAPI
@@ -252,6 +254,8 @@ apis:
   humanURL: https://developer.lufthansa-cargo.com/apis/shipmenttrackingpublic
   baseURL: https://api.lufthansa-cargo.com
   tags:
+  - Stations
+  tags_raw:
   - stations
   properties:
   - type: OpenAPI
