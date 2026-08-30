@@ -1,0 +1,256 @@
+openapi: 3.2.0
+info:
+  title: Station Information Stations API
+  version: '2.0'
+  contact:
+    email: apisupport.lcag@dlh.de
+    url: ''
+  description: Access station information and receive details such as opening hours, export‑ and import‑relevant information, addresses, and additional operational data for Lufthansa Cargo stations worldwide.
+servers:
+- url: https://api.lufthansa-cargo.com
+  description: ''
+security:
+- ApiKeyAuth: []
+tags:
+- name: stations
+paths:
+  /lhcargo/handling/stations/v1/codes:
+    get:
+      summary: Get a list of all station codes
+      tags:
+      - stations
+      operationId: getStationCodes
+      description: Receive a list of all stations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IATACode'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+  /lhcargo/handling/stations/v1/station:
+    post:
+      summary: Get detail of the stations in the request
+      tags:
+      - stations
+      operationId: getStationDetailList
+      description: Receive a list of station details
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IATACodeList'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Station'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+  /lhcargo/handling/stations/v1/station/{IATACode}:
+    get:
+      summary: Get station details
+      tags:
+      - stations
+      operationId: getStationDetails
+      description: get information for one station
+      parameters:
+      - name: IATACode
+        description: IATACode
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/IATACode'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Station'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    Export:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        openingHours:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyOpeningHours'
+    Import:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        firmsCode:
+          type: string
+          example: E821
+        ciscFee:
+          type: string
+          example: null
+        storage:
+          type: string
+          example: null
+        extraComment:
+          type: string
+          example: null
+        openingHours:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyOpeningHours'
+    DayOfWeek:
+      type: string
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    Contact:
+      type: object
+      properties:
+        generalEmail:
+          type: string
+          example: null
+        generalPhone:
+          type: string
+          example: null
+        handlingEmail:
+          type: string
+          example: ordimport@dlh.de
+        handlingPhone:
+          type: string
+          example: null
+    IATACodeList:
+      type: object
+      x-nullable: true
+      properties:
+        stationCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IATACode'
+    OpenClose:
+      type: object
+      properties:
+        open:
+          type: string
+          example: 07:00:00
+        close:
+          type: string
+          example: '17:00:00'
+    IATACode:
+      type: string
+      pattern: ^[A-Z]{3}$
+      example: ORD
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          example: South Access Rd.
+        streetNo:
+          type: string
+          example: 5
+        building:
+          type: string
+          example: Bldg 616
+        zipCode:
+          type: string
+          example: 60666
+        city:
+          type: string
+          example: Chicago, IL
+    DailyOpeningHours:
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/DayOfWeek'
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenClose'
+    Station:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/IATACode'
+        name:
+          type: string
+          example: CHICAGO O'HARE INTERNATIONAL AIRPORT
+        freighterHandling:
+          type: boolean
+          example: true
+        passengerAircraftHandling:
+          type: boolean
+          example: true
+        truckHandling:
+          type: boolean
+          example: true
+        countryShort:
+          type: string
+          example: US
+        countryLong:
+          type: string
+          example: United States
+        import:
+          $ref: '#/components/schemas/Import'
+        export:
+          $ref: '#/components/schemas/Export'
+  responses:
+    ErrorResponse:
+      description: generic error respoonse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
