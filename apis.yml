@@ -144,6 +144,11 @@ apis:
   humanURL: https://developer.lufthansa-cargo.com/prior-agreement-apis
   tags:
   - Trucking
+  - Terminal
+  - Air Cargo
+  - Prior Agreement
+  tags_raw:
+  - Trucking
   - Terminals
   - Air Cargo
   - Prior Agreement
