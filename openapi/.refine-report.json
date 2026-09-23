@@ -1,0 +1,32 @@
+{
+  "provider": "lufthansa-cargo",
+  "sources": [
+    "_original/lufthansa-cargo-routing-offer-api-openapi.yml",
+    "_original/lufthansa-cargo-station-information-api-openapi.yml",
+    "lufthansa-cargo-shipment-tracking-api-openapi.yml",
+    "lufthansa-cargo-shipment-tracking-subscribe-api-openapi.yml"
+  ],
+  "outputs": [
+    "lufthansa-cargo-routes-api-openapi.yml",
+    "lufthansa-cargo-stations-api-openapi.yml",
+    "lufthansa-cargo-shipment-tracking-api-openapi.yml",
+    "lufthansa-cargo-shipment-tracking-subscribe-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [
+    "lufthansa-cargo-shipment-tracking-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /lhcargo/handling/shipmenttracking/v4/shipment get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "lufthansa-cargo-shipment-tracking-subscribe-api-openapi.yml: previously refined output kept for 5 operation(s) no archived document covers (e.g. /lhcargo/handling/shipmenttrackingpush/v4/subscribe post, /lhcargo/handling/shipmenttrackingpush/v4/subscribe/all get, /lhcargo/handling/shipmenttrackingpush/v4/subscribe/{subscriptionId} delete); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "lufthansa-cargo-routing-offer-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "lufthansa-cargo-routing-offer-api-openapi.yml: declared missing tag: routes",
+    "lufthansa-cargo-station-information-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "lufthansa-cargo-routes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lufthansa-cargo-stations-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

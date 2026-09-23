@@ -12,13 +12,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: stations
+- name: Stations
 paths:
   /lhcargo/handling/stations/v1/codes:
     get:
       summary: Get a list of all station codes
       tags:
-      - stations
+      - Stations
       operationId: getStationCodes
       description: Receive a list of all stations
       responses:
@@ -42,7 +42,7 @@ paths:
     post:
       summary: Get detail of the stations in the request
       tags:
-      - stations
+      - Stations
       operationId: getStationDetailList
       description: Receive a list of station details
       requestBody:
@@ -72,7 +72,7 @@ paths:
     get:
       summary: Get station details
       tags:
-      - stations
+      - Stations
       operationId: getStationDetails
       description: get information for one station
       parameters:
@@ -101,120 +101,6 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
-    Export:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        contact:
-          $ref: '#/components/schemas/Contact'
-        openingHours:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyOpeningHours'
-    Import:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        contact:
-          $ref: '#/components/schemas/Contact'
-        firmsCode:
-          type: string
-          example: E821
-        ciscFee:
-          type: string
-          example: null
-        storage:
-          type: string
-          example: null
-        extraComment:
-          type: string
-          example: null
-        openingHours:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyOpeningHours'
-    DayOfWeek:
-      type: string
-      enum:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-    Contact:
-      type: object
-      properties:
-        generalEmail:
-          type: string
-          example: null
-        generalPhone:
-          type: string
-          example: null
-        handlingEmail:
-          type: string
-          example: ordimport@dlh.de
-        handlingPhone:
-          type: string
-          example: null
-    IATACodeList:
-      type: object
-      x-nullable: true
-      properties:
-        stationCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/IATACode'
-    OpenClose:
-      type: object
-      properties:
-        open:
-          type: string
-          example: 07:00:00
-        close:
-          type: string
-          example: '17:00:00'
-    IATACode:
-      type: string
-      pattern: ^[A-Z]{3}$
-      example: ORD
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-          example: South Access Rd.
-        streetNo:
-          type: string
-          example: 5
-        building:
-          type: string
-          example: Bldg 616
-        zipCode:
-          type: string
-          example: 60666
-        city:
-          type: string
-          example: Chicago, IL
-    DailyOpeningHours:
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/DayOfWeek'
-        hours:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenClose'
     Station:
       type: object
       properties:
@@ -242,6 +128,120 @@ components:
           $ref: '#/components/schemas/Import'
         export:
           $ref: '#/components/schemas/Export'
+    Import:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        firmsCode:
+          type: string
+          example: E821
+        ciscFee:
+          type: string
+          example: null
+        storage:
+          type: string
+          example: null
+        extraComment:
+          type: string
+          example: null
+        openingHours:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyOpeningHours'
+    Contact:
+      type: object
+      properties:
+        generalEmail:
+          type: string
+          example: null
+        generalPhone:
+          type: string
+          example: null
+        handlingEmail:
+          type: string
+          example: ordimport@dlh.de
+        handlingPhone:
+          type: string
+          example: null
+    DailyOpeningHours:
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/DayOfWeek'
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenClose'
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          example: South Access Rd.
+        streetNo:
+          type: string
+          example: 5
+        building:
+          type: string
+          example: Bldg 616
+        zipCode:
+          type: string
+          example: 60666
+        city:
+          type: string
+          example: Chicago, IL
+    OpenClose:
+      type: object
+      properties:
+        open:
+          type: string
+          example: 07:00:00
+        close:
+          type: string
+          example: '17:00:00'
+    IATACodeList:
+      type: object
+      x-nullable: true
+      properties:
+        stationCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IATACode'
+    DayOfWeek:
+      type: string
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+    Export:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        openingHours:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyOpeningHours'
+    IATACode:
+      type: string
+      pattern: ^[A-Z]{3}$
+      example: ORD
   responses:
     ErrorResponse:
       description: generic error respoonse

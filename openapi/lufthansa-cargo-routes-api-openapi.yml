@@ -8,7 +8,7 @@ servers:
 security:
 - ApikeyAuth: []
 tags:
-- name: routes
+- name: Routes
 paths:
   /lhcargo/sales/booking/v3/getroutes:
     get:
@@ -129,7 +129,9 @@ paths:
                       aircraftType: 77X
       summary: Get routing for given origin and destination
       tags:
-      - routes
+      - Routes
+      operationId: getLhcargoSalesBookingV3Getroutes
+      x-operation-id-source: derived
 components:
   schemas:
     getRoutesResponse:
