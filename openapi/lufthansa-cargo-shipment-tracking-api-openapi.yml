@@ -44,82 +44,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    event:
-      type: array
-      required:
-      - category
-      items:
-        properties:
-          type:
-            type: string
-          station:
-            type: string
-          actualTime:
-            type: string
-            format: date-time
-          actualTotals:
-            $ref: '#/components/schemas/actualTotals'
-          category:
-            type: string
-          classifier:
-            type: string
-    productConditions:
-      type: object
-      required:
-      - sPLList
-      properties:
-        sPLList:
-          $ref: '#/components/schemas/sPLList'
-        productCode:
-          type: string
-    shipment:
-      type: object
-      required:
-      - shipmentId
-      - awbIssueStation
-      properties:
-        shipmentId:
-          $ref: '#/components/schemas/shipmentId'
-        awbIssueStation:
-          type: string
-    booking:
-      required:
-      - product
-      - bookingTime
-      - isSplitBooking
-      type: object
-      properties:
-        product:
-          $ref: '#/components/schemas/product'
-        totals:
-          $ref: '#/components/schemas/totals'
-        originalTimeFrame:
-          $ref: '#/components/schemas/originalTimeFrame'
-        origin:
-          type: string
-        destination:
-          type: string
-        bookingTime:
-          type: string
-          format: date-time
-        isSplitBooking:
-          type: string
-        confirmationStatus:
-          type: string
-    actualTotals:
-      type: array
-      required:
-      - noOfPieces
-      - weight
-      items:
-        properties:
-          noOfPieces:
-            type: string
-          weight:
-            type: number
-            format: float
-          isComplete:
-            type: string
     totals:
       type: object
       required:
@@ -131,32 +55,25 @@ components:
         weight:
           type: number
           format: float
-    plannedTotals:
+    shipment:
       type: object
       required:
-      - noOfPieces
-      - weight
+      - shipmentId
+      - awbIssueStation
       properties:
-        noOfPieces:
+        shipmentId:
+          $ref: '#/components/schemas/shipmentId'
+        awbIssueStation:
           type: string
-        weight:
-          type: number
-          format: float
-    milestonePlan:
+    productConditions:
       type: object
       required:
-      - version
-      - milestones
+      - sPLList
       properties:
-        version:
+        sPLList:
+          $ref: '#/components/schemas/sPLList'
+        productCode:
           type: string
-          minLength: 1
-          maxLength: 10
-        milestones:
-          type: object
-          properties:
-            milestone:
-              $ref: '#/components/schemas/milestone'
     flightMovementDetails:
       type: object
       properties:
@@ -175,26 +92,61 @@ components:
           format: date-time
         flightEventInformation:
           type: string
-    shipmentId:
+    product:
       type: object
-      required:
-      - carrierNumericCode
-      - aWBNumber
-      - isAWBNoCheckDigitUsed
       properties:
-        carrierNumericCode:
+        productName:
           type: string
-        closeDateAndTime:
+        productConditions:
+          $ref: '#/components/schemas/productConditions'
+    actualTotals:
+      type: array
+      required:
+      - noOfPieces
+      - weight
+      items:
+        properties:
+          noOfPieces:
+            type: string
+          weight:
+            type: number
+            format: float
+          isComplete:
+            type: string
+    milestone:
+      type: array
+      required:
+      - type
+      - events
+      items:
+        properties:
+          type:
+            type: string
+          station:
+            type: string
+          plannedTime:
+            type: string
+            format: date-time
+          actualTime:
+            type: string
+            format: date-time
+          plannedTotals:
+            $ref: '#/components/schemas/plannedTotals'
+          actualTotals:
+            $ref: '#/components/schemas/actualTotals'
+          flight:
+            $ref: '#/components/schemas/flight'
+          events:
+            $ref: '#/components/schemas/events'
+    originalTimeFrame:
+      type: object
+      properties:
+        lAT:
           type: string
           format: date-time
-        aWBNumber:
+        tOA:
           type: string
-        isAWBNoCheckDigitUsed:
-          type: string
-        aWBSequenceNumber:
-          type: integer
-        revisionNo:
-          type: integer
+          format: date-time
     shipmentTrackingStatus:
       type: object
       required:
@@ -222,6 +174,11 @@ components:
           $ref: '#/components/schemas/flightMovementDetails'
         shipmentStatusEvents:
           $ref: '#/components/schemas/shipmentStatusEvents'
+    events:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/event'
     sPLList:
       type: object
       properties:
@@ -229,85 +186,6 @@ components:
           type: array
           items:
             type: string
-    efreightDetails:
-      type: object
-      properties:
-        preCheckStatus:
-          type: object
-          properties:
-            precheckStatusCode:
-              type: string
-            precheckStatusDescription:
-              type: string
-            precheckTime:
-              type: string
-              format: date-time
-            precheckTimeUTC:
-              type: string
-              format: date-time
-    originalTimeFrame:
-      type: object
-      properties:
-        lAT:
-          type: string
-          format: date-time
-        tOA:
-          type: string
-          format: date-time
-    milestone:
-      type: array
-      required:
-      - type
-      - events
-      items:
-        properties:
-          type:
-            type: string
-          station:
-            type: string
-          plannedTime:
-            type: string
-            format: date-time
-          actualTime:
-            type: string
-            format: date-time
-          plannedTotals:
-            $ref: '#/components/schemas/plannedTotals'
-          actualTotals:
-            $ref: '#/components/schemas/actualTotals'
-          flight:
-            $ref: '#/components/schemas/flight'
-          events:
-            $ref: '#/components/schemas/events'
-    shipmentStatusEvents:
-      type: object
-      properties:
-        event:
-          required:
-          - category
-          type: array
-          items:
-            properties:
-              category:
-                type: string
-              type:
-                type: string
-              station:
-                type: string
-              flight:
-                $ref: '#/components/schemas/flight'
-    product:
-      type: object
-      properties:
-        productName:
-          type: string
-        productConditions:
-          $ref: '#/components/schemas/productConditions'
-    events:
-      type: object
-      properties:
-        event:
-          $ref: '#/components/schemas/event'
     flight:
       type: object
       required:
@@ -326,6 +204,128 @@ components:
           type: string
         flightSegmentDestination:
           type: string
+    milestonePlan:
+      type: object
+      required:
+      - version
+      - milestones
+      properties:
+        version:
+          type: string
+          minLength: 1
+          maxLength: 10
+        milestones:
+          type: object
+          properties:
+            milestone:
+              $ref: '#/components/schemas/milestone'
+    shipmentId:
+      type: object
+      required:
+      - carrierNumericCode
+      - aWBNumber
+      - isAWBNoCheckDigitUsed
+      properties:
+        carrierNumericCode:
+          type: string
+        closeDateAndTime:
+          type: string
+          format: date-time
+        aWBNumber:
+          type: string
+        isAWBNoCheckDigitUsed:
+          type: string
+        aWBSequenceNumber:
+          type: integer
+        revisionNo:
+          type: integer
+    plannedTotals:
+      type: object
+      required:
+      - noOfPieces
+      - weight
+      properties:
+        noOfPieces:
+          type: string
+        weight:
+          type: number
+          format: float
+    event:
+      type: array
+      required:
+      - category
+      items:
+        properties:
+          type:
+            type: string
+          station:
+            type: string
+          actualTime:
+            type: string
+            format: date-time
+          actualTotals:
+            $ref: '#/components/schemas/actualTotals'
+          category:
+            type: string
+          classifier:
+            type: string
+    booking:
+      required:
+      - product
+      - bookingTime
+      - isSplitBooking
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/product'
+        totals:
+          $ref: '#/components/schemas/totals'
+        originalTimeFrame:
+          $ref: '#/components/schemas/originalTimeFrame'
+        origin:
+          type: string
+        destination:
+          type: string
+        bookingTime:
+          type: string
+          format: date-time
+        isSplitBooking:
+          type: string
+        confirmationStatus:
+          type: string
+    efreightDetails:
+      type: object
+      properties:
+        preCheckStatus:
+          type: object
+          properties:
+            precheckStatusCode:
+              type: string
+            precheckStatusDescription:
+              type: string
+            precheckTime:
+              type: string
+              format: date-time
+            precheckTimeUTC:
+              type: string
+              format: date-time
+    shipmentStatusEvents:
+      type: object
+      properties:
+        event:
+          required:
+          - category
+          type: array
+          items:
+            properties:
+              category:
+                type: string
+              type:
+                type: string
+              station:
+                type: string
+              flight:
+                $ref: '#/components/schemas/flight'
   securitySchemes:
     ApikeyAuth:
       type: apiKey

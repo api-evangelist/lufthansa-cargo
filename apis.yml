@@ -115,7 +115,7 @@ apis:
   - type: Authentication
     url: https://developer.lufthansa-cargo.com/how-to-connect
 - aid: lufthansa-cargo:lufthansa-cargo-smartbooking-api
-  name: Lufthansa Cargo smartBooking API
+  name: Lufthansa Cargo Smart Booking API
   description: >-
     Prior-agreement API. Lufthansa Cargo's digital booking connect for forwarders wiring an in-house system
     to the carrier and for ePlatforms integrating LH Cargo offers and bookings. Documented services are
