@@ -124,6 +124,40 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DailyOpeningHours'
+    DailyOpeningHours:
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/DayOfWeek'
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenClose'
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          example: South Access Rd.
+        streetNo:
+          type: string
+          example: 5
+        building:
+          type: string
+          example: Bldg 616
+        zipCode:
+          type: string
+          example: 60666
+        city:
+          type: string
+          example: Chicago, IL
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
     DayOfWeek:
       type: string
       enum:
@@ -134,17 +168,27 @@ components:
       - FRIDAY
       - SATURDAY
       - SUNDAY
+    OpenClose:
+      type: object
+      properties:
+        open:
+          type: string
+          example: 07:00:00
+        close:
+          type: string
+          example: '17:00:00'
     IATACode:
       type: string
       pattern: ^[A-Z]{3}$
       example: ORD
-    Error:
+    IATACodeList:
       type: object
+      x-nullable: true
       properties:
-        status:
-          type: integer
-        message:
-          type: string
+        stationCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IATACode'
     Contact:
       type: object
       properties:
@@ -198,50 +242,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DailyOpeningHours'
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-          example: South Access Rd.
-        streetNo:
-          type: string
-          example: 5
-        building:
-          type: string
-          example: Bldg 616
-        zipCode:
-          type: string
-          example: 60666
-        city:
-          type: string
-          example: Chicago, IL
-    OpenClose:
-      type: object
-      properties:
-        open:
-          type: string
-          example: 07:00:00
-        close:
-          type: string
-          example: '17:00:00'
-    DailyOpeningHours:
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/DayOfWeek'
-        hours:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenClose'
-    IATACodeList:
-      type: object
-      x-nullable: true
-      properties:
-        stationCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/IATACode'
   responses:
     ErrorResponse:
       description: generic error respoonse

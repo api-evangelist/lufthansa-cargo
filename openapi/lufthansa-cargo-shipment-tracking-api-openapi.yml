@@ -55,64 +55,6 @@ components:
         weight:
           type: number
           format: float
-    shipment:
-      type: object
-      required:
-      - shipmentId
-      - awbIssueStation
-      properties:
-        shipmentId:
-          $ref: '#/components/schemas/shipmentId'
-        awbIssueStation:
-          type: string
-    productConditions:
-      type: object
-      required:
-      - sPLList
-      properties:
-        sPLList:
-          $ref: '#/components/schemas/sPLList'
-        productCode:
-          type: string
-    flightMovementDetails:
-      type: object
-      properties:
-        flightCarrierCode:
-          type: string
-        flightNumber:
-          type: string
-        flightDate:
-          type: string
-          format: date
-        eta:
-          type: string
-          format: date-time
-        etaUTC:
-          type: string
-          format: date-time
-        flightEventInformation:
-          type: string
-    product:
-      type: object
-      properties:
-        productName:
-          type: string
-        productConditions:
-          $ref: '#/components/schemas/productConditions'
-    actualTotals:
-      type: array
-      required:
-      - noOfPieces
-      - weight
-      items:
-        properties:
-          noOfPieces:
-            type: string
-          weight:
-            type: number
-            format: float
-          isComplete:
-            type: string
     milestone:
       type: array
       required:
@@ -138,15 +80,46 @@ components:
             $ref: '#/components/schemas/flight'
           events:
             $ref: '#/components/schemas/events'
-    originalTimeFrame:
+    efreightDetails:
       type: object
       properties:
-        lAT:
+        preCheckStatus:
+          type: object
+          properties:
+            precheckStatusCode:
+              type: string
+            precheckStatusDescription:
+              type: string
+            precheckTime:
+              type: string
+              format: date-time
+            precheckTimeUTC:
+              type: string
+              format: date-time
+    booking:
+      required:
+      - product
+      - bookingTime
+      - isSplitBooking
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/product'
+        totals:
+          $ref: '#/components/schemas/totals'
+        originalTimeFrame:
+          $ref: '#/components/schemas/originalTimeFrame'
+        origin:
+          type: string
+        destination:
+          type: string
+        bookingTime:
           type: string
           format: date-time
-        tOA:
+        isSplitBooking:
           type: string
-          format: date-time
+        confirmationStatus:
+          type: string
     shipmentTrackingStatus:
       type: object
       required:
@@ -174,11 +147,20 @@ components:
           $ref: '#/components/schemas/flightMovementDetails'
         shipmentStatusEvents:
           $ref: '#/components/schemas/shipmentStatusEvents'
-    events:
-      type: object
-      properties:
-        event:
-          $ref: '#/components/schemas/event'
+    actualTotals:
+      type: array
+      required:
+      - noOfPieces
+      - weight
+      items:
+        properties:
+          noOfPieces:
+            type: string
+          weight:
+            type: number
+            format: float
+          isComplete:
+            type: string
     sPLList:
       type: object
       properties:
@@ -186,6 +168,73 @@ components:
           type: array
           items:
             type: string
+    shipmentStatusEvents:
+      type: object
+      properties:
+        event:
+          required:
+          - category
+          type: array
+          items:
+            properties:
+              category:
+                type: string
+              type:
+                type: string
+              station:
+                type: string
+              flight:
+                $ref: '#/components/schemas/flight'
+    milestonePlan:
+      type: object
+      required:
+      - version
+      - milestones
+      properties:
+        version:
+          type: string
+          minLength: 1
+          maxLength: 10
+        milestones:
+          type: object
+          properties:
+            milestone:
+              $ref: '#/components/schemas/milestone'
+    originalTimeFrame:
+      type: object
+      properties:
+        lAT:
+          type: string
+          format: date-time
+        tOA:
+          type: string
+          format: date-time
+    shipment:
+      type: object
+      required:
+      - shipmentId
+      - awbIssueStation
+      properties:
+        shipmentId:
+          $ref: '#/components/schemas/shipmentId'
+        awbIssueStation:
+          type: string
+    events:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/event'
+    plannedTotals:
+      type: object
+      required:
+      - noOfPieces
+      - weight
+      properties:
+        noOfPieces:
+          type: string
+        weight:
+          type: number
+          format: float
     flight:
       type: object
       required:
@@ -204,21 +253,6 @@ components:
           type: string
         flightSegmentDestination:
           type: string
-    milestonePlan:
-      type: object
-      required:
-      - version
-      - milestones
-      properties:
-        version:
-          type: string
-          minLength: 1
-          maxLength: 10
-        milestones:
-          type: object
-          properties:
-            milestone:
-              $ref: '#/components/schemas/milestone'
     shipmentId:
       type: object
       required:
@@ -239,17 +273,15 @@ components:
           type: integer
         revisionNo:
           type: integer
-    plannedTotals:
+    productConditions:
       type: object
       required:
-      - noOfPieces
-      - weight
+      - sPLList
       properties:
-        noOfPieces:
+        sPLList:
+          $ref: '#/components/schemas/sPLList'
+        productCode:
           type: string
-        weight:
-          type: number
-          format: float
     event:
       type: array
       required:
@@ -269,63 +301,31 @@ components:
             type: string
           classifier:
             type: string
-    booking:
-      required:
-      - product
-      - bookingTime
-      - isSplitBooking
+    product:
       type: object
       properties:
-        product:
-          $ref: '#/components/schemas/product'
-        totals:
-          $ref: '#/components/schemas/totals'
-        originalTimeFrame:
-          $ref: '#/components/schemas/originalTimeFrame'
-        origin:
+        productName:
           type: string
-        destination:
+        productConditions:
+          $ref: '#/components/schemas/productConditions'
+    flightMovementDetails:
+      type: object
+      properties:
+        flightCarrierCode:
           type: string
-        bookingTime:
+        flightNumber:
+          type: string
+        flightDate:
+          type: string
+          format: date
+        eta:
           type: string
           format: date-time
-        isSplitBooking:
+        etaUTC:
           type: string
-        confirmationStatus:
+          format: date-time
+        flightEventInformation:
           type: string
-    efreightDetails:
-      type: object
-      properties:
-        preCheckStatus:
-          type: object
-          properties:
-            precheckStatusCode:
-              type: string
-            precheckStatusDescription:
-              type: string
-            precheckTime:
-              type: string
-              format: date-time
-            precheckTimeUTC:
-              type: string
-              format: date-time
-    shipmentStatusEvents:
-      type: object
-      properties:
-        event:
-          required:
-          - category
-          type: array
-          items:
-            properties:
-              category:
-                type: string
-              type:
-                type: string
-              station:
-                type: string
-              flight:
-                $ref: '#/components/schemas/flight'
   securitySchemes:
     ApikeyAuth:
       type: apiKey
