@@ -200,6 +200,36 @@ paths:
       - Shipment Tracking Subscribe
 components:
   schemas:
+    Subscription:
+      properties:
+        subscriptionId:
+          $ref: '#/components/schemas/subscriptionId'
+        awb:
+          $ref: '#/components/schemas/awb'
+        callback:
+          $ref: '#/components/schemas/callback'
+        states:
+          $ref: '#/components/schemas/shipmentStatus'
+      required:
+      - awb
+      - callback
+      - states
+      - subscriptionId
+      type: object
+    awb:
+      description: abw number of an shipment
+      example: 020-12345678
+      type: string
+    shipmentStatus:
+      enum:
+      - '*,RCS, MAN, DEP, ARR, RCF, NFD, DLV, DDL, RCT, TFD, DIS, TOA, PRE'
+      type: string
+      example: '*'
+    callback:
+      description: Callback URL
+      example: https://yoursoftwaresolution.com/lufthansacargo/trackingCallback
+      format: uri
+      type: string
     SubscriptionRequest:
       properties:
         awb:
@@ -218,36 +248,11 @@ components:
       - callback
       - states
       type: object
-    awb:
-      description: abw number of an shipment
-      example: 020-12345678
-      type: string
-    shipmentStatus:
-      enum:
-      - '*,RCS, MAN, DEP, ARR, RCF, NFD, DLV, DDL, RCT, TFD, DIS, TOA, PRE'
-      type: string
-      example: '*'
     subscriptionId:
       description: UUIDv4 of subscription
       example: 70904e8c-f953-4ef5-b9f4-6c34711cf801
       pattern: ^\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$
       type: string
-    Subscription:
-      properties:
-        subscriptionId:
-          $ref: '#/components/schemas/subscriptionId'
-        awb:
-          $ref: '#/components/schemas/awb'
-        callback:
-          $ref: '#/components/schemas/callback'
-        states:
-          $ref: '#/components/schemas/shipmentStatus'
-      required:
-      - awb
-      - callback
-      - states
-      - subscriptionId
-      type: object
     ShipmentStatusUpdate:
       properties:
         awb:
@@ -266,11 +271,6 @@ components:
       - callback
       - states
       type: object
-    callback:
-      description: Callback URL
-      example: https://yoursoftwaresolution.com/lufthansacargo/trackingCallback
-      format: uri
-      type: string
   securitySchemes:
     ApikeyAuth:
       type: apiKey

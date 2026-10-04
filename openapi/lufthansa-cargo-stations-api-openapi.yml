@@ -101,29 +101,6 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
-    Import:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        contact:
-          $ref: '#/components/schemas/Contact'
-        firmsCode:
-          type: string
-          example: E821
-        ciscFee:
-          type: string
-          example: null
-        storage:
-          type: string
-          example: null
-        extraComment:
-          type: string
-          example: null
-        openingHours:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyOpeningHours'
     DailyOpeningHours:
       type: object
       properties:
@@ -151,59 +128,6 @@ components:
         city:
           type: string
           example: Chicago, IL
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-    DayOfWeek:
-      type: string
-      enum:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-    OpenClose:
-      type: object
-      properties:
-        open:
-          type: string
-          example: 07:00:00
-        close:
-          type: string
-          example: '17:00:00'
-    IATACode:
-      type: string
-      pattern: ^[A-Z]{3}$
-      example: ORD
-    IATACodeList:
-      type: object
-      x-nullable: true
-      properties:
-        stationCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/IATACode'
-    Contact:
-      type: object
-      properties:
-        generalEmail:
-          type: string
-          example: null
-        generalPhone:
-          type: string
-          example: null
-        handlingEmail:
-          type: string
-          example: ordimport@dlh.de
-        handlingPhone:
-          type: string
-          example: null
     Station:
       type: object
       properties:
@@ -231,6 +155,27 @@ components:
           $ref: '#/components/schemas/Import'
         export:
           $ref: '#/components/schemas/Export'
+    DayOfWeek:
+      type: string
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+    IATACode:
+      type: string
+      pattern: ^[A-Z]{3}$
+      example: ORD
     Export:
       type: object
       properties:
@@ -238,6 +183,61 @@ components:
           $ref: '#/components/schemas/Address'
         contact:
           $ref: '#/components/schemas/Contact'
+        openingHours:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyOpeningHours'
+    OpenClose:
+      type: object
+      properties:
+        open:
+          type: string
+          example: 07:00:00
+        close:
+          type: string
+          example: '17:00:00'
+    IATACodeList:
+      type: object
+      x-nullable: true
+      properties:
+        stationCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IATACode'
+    Contact:
+      type: object
+      properties:
+        generalEmail:
+          type: string
+          example: null
+        generalPhone:
+          type: string
+          example: null
+        handlingEmail:
+          type: string
+          example: ordimport@dlh.de
+        handlingPhone:
+          type: string
+          example: null
+    Import:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        firmsCode:
+          type: string
+          example: E821
+        ciscFee:
+          type: string
+          example: null
+        storage:
+          type: string
+          example: null
+        extraComment:
+          type: string
+          example: null
         openingHours:
           type: array
           items:
