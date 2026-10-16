@@ -1,0 +1,14 @@
+{
+  "repo": "lufthansa-cargo",
+  "feeds": [
+    {
+      "source": "https://www.lufthansa-cargo.com/en/ci/newsroom",
+      "feed_url": "https://www.lufthansa-cargo.com/en/ci/newsroom",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-10-10T13:15:00Z"
+}
