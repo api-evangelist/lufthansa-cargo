@@ -100,16 +100,52 @@ paths:
         '500':
           $ref: '#/components/responses/ErrorResponse'
 components:
+  responses:
+    ErrorResponse:
+      description: generic error respoonse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    DailyOpeningHours:
+    Export:
       type: object
       properties:
-        day:
-          $ref: '#/components/schemas/DayOfWeek'
-        hours:
+        address:
+          $ref: '#/components/schemas/Address'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        openingHours:
           type: array
           items:
-            $ref: '#/components/schemas/OpenClose'
+            $ref: '#/components/schemas/DailyOpeningHours'
+    IATACode:
+      type: string
+      pattern: ^[A-Z]{3}$
+      example: ORD
+    Import:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        firmsCode:
+          type: string
+          example: E821
+        ciscFee:
+          type: string
+          example: null
+        storage:
+          type: string
+          example: null
+        extraComment:
+          type: string
+          example: null
+        openingHours:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyOpeningHours'
     Address:
       type: object
       properties:
@@ -128,6 +164,15 @@ components:
         city:
           type: string
           example: Chicago, IL
+    OpenClose:
+      type: object
+      properties:
+        open:
+          type: string
+          example: 07:00:00
+        close:
+          type: string
+          example: '17:00:00'
     Station:
       type: object
       properties:
@@ -155,55 +200,6 @@ components:
           $ref: '#/components/schemas/Import'
         export:
           $ref: '#/components/schemas/Export'
-    DayOfWeek:
-      type: string
-      enum:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-    IATACode:
-      type: string
-      pattern: ^[A-Z]{3}$
-      example: ORD
-    Export:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        contact:
-          $ref: '#/components/schemas/Contact'
-        openingHours:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyOpeningHours'
-    OpenClose:
-      type: object
-      properties:
-        open:
-          type: string
-          example: 07:00:00
-        close:
-          type: string
-          example: '17:00:00'
-    IATACodeList:
-      type: object
-      x-nullable: true
-      properties:
-        stationCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/IATACode'
     Contact:
       type: object
       properties:
@@ -219,36 +215,40 @@ components:
         handlingPhone:
           type: string
           example: null
-    Import:
+    DailyOpeningHours:
       type: object
       properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        contact:
-          $ref: '#/components/schemas/Contact'
-        firmsCode:
-          type: string
-          example: E821
-        ciscFee:
-          type: string
-          example: null
-        storage:
-          type: string
-          example: null
-        extraComment:
-          type: string
-          example: null
-        openingHours:
+        day:
+          $ref: '#/components/schemas/DayOfWeek'
+        hours:
           type: array
           items:
-            $ref: '#/components/schemas/DailyOpeningHours'
-  responses:
-    ErrorResponse:
-      description: generic error respoonse
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/OpenClose'
+    IATACodeList:
+      type: object
+      x-nullable: true
+      properties:
+        stationCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IATACode'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+    DayOfWeek:
+      type: string
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

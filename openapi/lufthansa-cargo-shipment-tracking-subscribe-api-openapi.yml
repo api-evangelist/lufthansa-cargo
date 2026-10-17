@@ -200,6 +200,57 @@ paths:
       - Shipment Tracking Subscribe
 components:
   schemas:
+    SubscriptionRequest:
+      properties:
+        awb:
+          $ref: '#/components/schemas/awb'
+        callback:
+          $ref: '#/components/schemas/callback'
+        states:
+          $ref: '#/components/schemas/shipmentStatus'
+        businessPartnerNumber:
+          description: optional Business Partner Number
+          example: '987654321'
+          pattern: \d{9}$
+          type: string
+      required:
+      - awb
+      - callback
+      - states
+      type: object
+    ShipmentStatusUpdate:
+      properties:
+        awb:
+          $ref: '#/components/schemas/awb'
+        callback:
+          $ref: '#/components/schemas/callback'
+        states:
+          $ref: '#/components/schemas/shipmentStatus'
+        businessPartnerNumber:
+          description: optional Business Partner Number
+          example: '987654321'
+          pattern: \d{9}$
+          type: string
+      required:
+      - awb
+      - callback
+      - states
+      type: object
+    callback:
+      description: Callback URL
+      example: https://yoursoftwaresolution.com/lufthansacargo/trackingCallback
+      format: uri
+      type: string
+    shipmentStatus:
+      enum:
+      - '*,RCS, MAN, DEP, ARR, RCF, NFD, DLV, DDL, RCT, TFD, DIS, TOA, PRE'
+      type: string
+      example: '*'
+    subscriptionId:
+      description: UUIDv4 of subscription
+      example: 70904e8c-f953-4ef5-b9f4-6c34711cf801
+      pattern: ^\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$
+      type: string
     Subscription:
       properties:
         subscriptionId:
@@ -220,57 +271,6 @@ components:
       description: abw number of an shipment
       example: 020-12345678
       type: string
-    shipmentStatus:
-      enum:
-      - '*,RCS, MAN, DEP, ARR, RCF, NFD, DLV, DDL, RCT, TFD, DIS, TOA, PRE'
-      type: string
-      example: '*'
-    callback:
-      description: Callback URL
-      example: https://yoursoftwaresolution.com/lufthansacargo/trackingCallback
-      format: uri
-      type: string
-    SubscriptionRequest:
-      properties:
-        awb:
-          $ref: '#/components/schemas/awb'
-        callback:
-          $ref: '#/components/schemas/callback'
-        states:
-          $ref: '#/components/schemas/shipmentStatus'
-        businessPartnerNumber:
-          description: optional Business Partner Number
-          example: '987654321'
-          pattern: \d{9}$
-          type: string
-      required:
-      - awb
-      - callback
-      - states
-      type: object
-    subscriptionId:
-      description: UUIDv4 of subscription
-      example: 70904e8c-f953-4ef5-b9f4-6c34711cf801
-      pattern: ^\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$
-      type: string
-    ShipmentStatusUpdate:
-      properties:
-        awb:
-          $ref: '#/components/schemas/awb'
-        callback:
-          $ref: '#/components/schemas/callback'
-        states:
-          $ref: '#/components/schemas/shipmentStatus'
-        businessPartnerNumber:
-          description: optional Business Partner Number
-          example: '987654321'
-          pattern: \d{9}$
-          type: string
-      required:
-      - awb
-      - callback
-      - states
-      type: object
   securitySchemes:
     ApikeyAuth:
       type: apiKey
