@@ -1,4 +1,4 @@
-# Lufthansa Cargo (lufthansa-cargo)
+# Lufthansa Cargo
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,234 +66,100 @@
 
 Lufthansa Cargo AG is the air freight arm of the Lufthansa Group, headquartered in Frankfurt, Germany. It sells and operates belly capacity across the Lufthansa passenger fleet plus its own Boeing 777F freighters, and runs the Frankfurt Cargo Center hub, so it sits in the chain as the airline carrier between the freight forwarder and the destination handling agent. Its API posture is real but two-speed: a live Apigee developer portal at developer.lufthansa-cargo.com publishes four OpenAPI 3.0 contracts anonymously downloadable without a login (Routing Offer, Shipment Tracking, Shipment Tracking Subscribe, Station Information), while six further API products in the same portfolio - smartBooking, Truck PreAdvice, ULD Status, AirMail, CargoXML and CargoIMP - are published only as info-block stubs carrying the sentence that access is granted upon prior approval and agreement. Registration is reviewed by Lufthansa Cargo API managers before keys are issued and production access requires successful test-environment validation, so this is application-approval, not self-serve. The published REST surface is a proprietary Lufthansa Cargo shape, but it carries open air-cargo vocabulary inside it - IATA AWB prefix 020 plus 8-digit AWB numbers, 3-letter IATA station codes and the IATA cargo status code set (RCS, MAN, DEP, ARR, RCF, NFD, DLV) - while the legacy Cargo-IMP and Cargo-XML EDI message sets remain in the portfolio as gated products and IATA ONE Record went live in July 2026 through the IBS Software ONE Record server rather than as anything Lufthansa Cargo publishes itself.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/lufthansa-cargo/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/lufthansa-cargo/refs/heads/main/apis.yml)
+**Areas:** Logistics · Supply Chain · Germany · Air Cargo · Freight · Track and Trace · Standards · Aviation
 
-## Tags
+## Lufthansa Cargo on APIs.io
 
-- Logistics
-- Supply Chain
-- Germany
-- Air Cargo
-- Freight
-- Track and Trace
-- Standards
-- Aviation
+Everything profiled for Lufthansa Cargo is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/lufthansa-cargo/](https://apis.io/providers/lufthansa-cargo/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (10)
 
-- **Created:** 2026-07-30
-- **Modified:** 2026-07-30
+- [Lufthansa Cargo Shipment Tracking API](https://apis.io/apis/lufthansa-cargo/lufthansa-cargo-shipment-tracking-api/) — Retrieves the current status of an air freight shipment by IATA Air Waybill, keyed on a 3-digit AWB prefix (020 = Lufthansa Cargo) plus an 8-digit AWB…
+- [Lufthansa Cargo Shipment Tracking Subscribe API](https://apis.io/apis/lufthansa-cargo/lufthansa-cargo-shipment-tracking-subscribe-api/) — Subscription API that pushes shipment milestone updates to a caller-supplied HTTPS callback URL. Create, read, update, delete and list subscriptions for a…
+- [Lufthansa Cargo Smart Booking API](https://apis.io/apis/lufthansa-cargo/lufthansa-cargo-smartbooking-api/) — Prior-agreement API. Lufthansa Cargo's digital booking connect for forwarders wiring an in-house system to the carrier and for ePlatforms integrating LH…
+- [Lufthansa Cargo TruckPreAdvice API](https://apis.io/apis/lufthansa-cargo/lufthansa-cargo-truck-preadvice-api/) — Prior-agreement API. Manages advance notification of truck deliveries as an alternative to the Quick Drop-Off/Pick-Up page in the Lufthansa ePortal.…
+- [Lufthansa Cargo ULDStatus API](https://apis.io/apis/lufthansa-cargo/lufthansa-cargo-uld-status-api/) — Prior-agreement API behind the smartULD add-on service. Exposes sensory data from smart Unit Load Devices - ambient temperature, battery level, geodata -…
+- [Lufthansa Cargo CargoXML API](https://apis.io/apis/lufthansa-cargo/lufthansa-cargo-cargoxml-api/) — Prior-agreement API product named CargoXML in the Lufthansa Cargo portfolio, referencing the IATA Cargo-XML message standard. The portal publishes an…
+- [Lufthansa Cargo CargoIMP API](https://apis.io/apis/lufthansa-cargo/lufthansa-cargo-cargoimp-api/) — Prior-agreement API product listed as CargoIMP in the portfolio, referencing the legacy IATA Cargo Interchange Message Procedures EDI message set. The…
+- [Lufthansa Cargo AirMail API](https://apis.io/apis/lufthansa-cargo/lufthansa-cargo-airmail-api/) — Prior-agreement API product covering airmail carriage for postal operators. The portal publishes an OpenAPI 3.0.3 info block titled "AirMail APIs" whose…
+- [Lufthansa Cargo Routes API](https://apis.io/apis/lufthansa-cargo/lufthansa-cargo-routes-api/) — The routes API from Lufthansa Cargo — 1 operation(s) for routes.
+- [Lufthansa Cargo Stations API](https://apis.io/apis/lufthansa-cargo/lufthansa-cargo-stations-api/) — The stations API from Lufthansa Cargo — 3 operation(s) for stations.
 
-## APIs
+### Published properties
 
-### Lufthansa Cargo Shipment Tracking API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Retrieves the current status of an air freight shipment by IATA Air Waybill, keyed on a 3-digit AWB prefix (020 = Lufthansa Cargo) plus an 8-digit AWB number. Returns the milestone plan, booking, flight movement details, e-freight details and the shipment status event history. OpenAPI 3.0.0, version "1.0 - 2022.01.03", secured with an apikey header.
+#### Collections (4)
 
-- **Human URL:** [https://developer.lufthansa-cargo.com/apis/shipmenttrackingpublic](https://developer.lufthansa-cargo.com/apis/shipmenttrackingpublic)
-- **Base URL:** `https://api.lufthansa-cargo.com`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Routing Offer API](https://apis.io/collections/lufthansa-cargo/open-lufthansa-cargo-routing-offer-api/)
+- [Shipment Tracking API](https://apis.io/collections/lufthansa-cargo/open-lufthansa-cargo-shipment-tracking-api/)
+- [Shipment Tracking Subscribe API](https://apis.io/collections/lufthansa-cargo/open-lufthansa-cargo-shipment-tracking-subscribe-api/)
+- [Station Information API](https://apis.io/collections/lufthansa-cargo/open-lufthansa-cargo-station-information-api/)
 
-- Track and Trace
-- Air Cargo
-- Shipment Status
-- Air Waybill
+## Where to find this API
 
-#### Properties
-
-- [Open A P I](openapi/lufthansa-cargo-shipment-tracking-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://developer.lufthansa-cargo.com/apis/shipmenttrackingpublic)
-- [Authentication](https://developer.lufthansa-cargo.com/how-to-connect)
-
-### Lufthansa Cargo Shipment Tracking Subscribe API
-
-Subscription API that pushes shipment milestone updates to a caller-supplied HTTPS callback URL. Create, read, update, delete and list subscriptions for a given Air Waybill and status filter; the OpenAPI declares a shipmentStatusUpdate callback against the request-body callback field, with 401 for a disabled callback host and 403 for a callback host not allowed. Status filter values are the IATA cargo status codes RCS, MAN, DEP, ARR, RCF, NFD, DLV, DDL, RCT, TFD, DIS, TOA and PRE. OpenAPI 3.0.0, version "1.0 - 2022.01.03".
-
-- **Human URL:** [https://developer.lufthansa-cargo.com/apis/shipmenttrackingsubscribepublic](https://developer.lufthansa-cargo.com/apis/shipmenttrackingsubscribepublic)
-- **Base URL:** `https://api.lufthansa-cargo.com`
-
-#### Tags
-
-- Webhooks
-- Track and Trace
-- Air Cargo
-- Events
-- Air Waybill
-
-#### Properties
-
-- [Open A P I](openapi/lufthansa-cargo-shipment-tracking-subscribe-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://developer.lufthansa-cargo.com/apis/shipmenttrackingsubscribepublic)
-- [Authentication](https://developer.lufthansa-cargo.com/how-to-connect)
-
-### Lufthansa Cargo Routing Offer API
-
-Returns possible direct and connecting route offers between an origin and a destination 3-letter IATA airport code for a given departure date and Lufthansa Cargo product code, based on Latest Acceptance Time. Product codes are the carrier's own enumeration (FAN, FCO, FCP, FDG, FTF, FUN, FWN, YCO, YCP, YDG, YNB, YNZ, YTF, YUN, ZXB, ZXF, ZXO), with a filter for freighter and truck connections only. OpenAPI 3.0.0, version "1.1 - 2022.04.27".
-
-- **Human URL:** [https://developer.lufthansa-cargo.com/apis/routingpublic](https://developer.lufthansa-cargo.com/apis/routingpublic)
-- **Base URL:** `https://api.lufthansa-cargo.com`
-
-#### Tags
-
-- Routing
-- Schedules
-- Air Cargo
-- Capacity
-
-#### Properties
-
-- [Open A P I](openapi/lufthansa-cargo-routing-offer-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://developer.lufthansa-cargo.com/apis/routingpublic)
-- [Authentication](https://developer.lufthansa-cargo.com/how-to-connect)
-
-### Lufthansa Cargo Station Information API
-
-Reference data for Lufthansa Cargo stations worldwide, keyed on 3-letter IATA station codes. Lists all station codes, returns detail for a single station, and accepts a POST batch of codes. Detail covers addresses, contacts, ground handling agents, daily opening hours, and export and import operational capability including dangerous-goods classes, temperature-controlled and frozen storage ranges, dry ice, tarmac protection and container types. OpenAPI 3.0.0, version 2.0.
-
-- **Human URL:** [https://developer.lufthansa-cargo.com/apis/stationinformationpublic](https://developer.lufthansa-cargo.com/apis/stationinformationpublic)
-- **Base URL:** `https://api.lufthansa-cargo.com`
-
-#### Tags
-
-- Reference Data
-- Stations
-- Air Cargo
-- Handling
-
-#### Properties
-
-- [Open A P I](openapi/lufthansa-cargo-station-information-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://developer.lufthansa-cargo.com/apis/stationinformationpublic)
-- [Authentication](https://developer.lufthansa-cargo.com/how-to-connect)
-
-### Lufthansa Cargo smartBooking API
-
-Prior-agreement API. Lufthansa Cargo's digital booking connect for forwarders wiring an in-house system to the carrier and for ePlatforms integrating LH Cargo offers and bookings. Documented services are Product Offer Request, Booking, Update Booking, Get Booking, Delete Booking, and proactive status updates on existing bookings via Booking Push. The portal publishes only an OpenAPI info block for this product carrying the sentence that access is granted upon prior approval and agreement; no paths, servers or schemas are published, so no machine-readable contract was harvested.
-
-- **Human URL:** [https://developer.lufthansa-cargo.com/prior-agreement-apis](https://developer.lufthansa-cargo.com/prior-agreement-apis)
-
-#### Tags
-
-- Booking
-- Rates
-- Air Cargo
-- Prior Agreement
-
-#### Properties
-
-- [Documentation](https://developer.lufthansa-cargo.com/prior-agreement-apis)
-- [Onboarding](https://developer.lufthansa-cargo.com/partneronboardingprocess)
-
-### Lufthansa Cargo TruckPreAdvice API
-
-Prior-agreement API. Manages advance notification of truck deliveries as an alternative to the Quick Drop-Off/Pick-Up page in the Lufthansa ePortal. Documented functions are Save (create Visit Declarations used for check-in at LH Cargo onsite terminals), Get and Update. The portal publishes only an OpenAPI info block; no paths or schemas were published to harvest.
-
-- **Human URL:** [https://developer.lufthansa-cargo.com/prior-agreement-apis](https://developer.lufthansa-cargo.com/prior-agreement-apis)
-
-#### Tags
-
-- Trucking
-- Terminals
-- Air Cargo
-- Prior Agreement
-
-#### Properties
-
-- [Documentation](https://developer.lufthansa-cargo.com/prior-agreement-apis)
-- [Onboarding](https://developer.lufthansa-cargo.com/partneronboardingprocess)
-
-### Lufthansa Cargo ULDStatus API
-
-Prior-agreement API behind the smartULD add-on service. Exposes sensory data from smart Unit Load Devices - ambient temperature, battery level, geodata - plus container check status from handling for both smart and regular ULDs, aimed at Active Temp Control shipments. Documented services are get container data, create container subscriptions, list subscriptions, get a single subscription and delete a subscription. The portal publishes only an OpenAPI info block; no paths or schemas were published to harvest.
-
-- **Human URL:** [https://developer.lufthansa-cargo.com/prior-agreement-apis](https://developer.lufthansa-cargo.com/prior-agreement-apis)
-
-#### Tags
-
-- ULD
-- Telematics
-- Cold Chain
-- Air Cargo
-- Prior Agreement
-
-#### Properties
-
-- [Documentation](https://developer.lufthansa-cargo.com/prior-agreement-apis)
-- [Onboarding](https://developer.lufthansa-cargo.com/partneronboardingprocess)
-
-### Lufthansa Cargo CargoXML API
-
-Prior-agreement API product named CargoXML in the Lufthansa Cargo portfolio, referencing the IATA Cargo-XML message standard. The portal publishes an OpenAPI 3.0.3 info block titled "CargoXML APIs" whose entire description is the notice that Lufthansa Cargo will only give access upon prior approval and agreement. No version of the Cargo-XML standard, no message set, no endpoint and no schema is published, so nothing machine-readable was harvestable.
-
-- **Human URL:** [https://developer.lufthansa-cargo.com/apis/cargoxml](https://developer.lufthansa-cargo.com/apis/cargoxml)
-
-#### Tags
-
-- EDI
-- Cargo-XML
-- IATA
-- Messaging
-- Prior Agreement
-
-#### Properties
-
-- [Documentation](https://developer.lufthansa-cargo.com/apis/cargoxml)
-- [Onboarding](https://developer.lufthansa-cargo.com/partneronboardingprocess)
-
-### Lufthansa Cargo CargoIMP API
-
-Prior-agreement API product listed as CargoIMP in the portfolio, referencing the legacy IATA Cargo Interchange Message Procedures EDI message set. The portal publishes an OpenAPI 3.0.1 info block titled "CargoMessaging APIs" whose entire description is the prior-approval notice. No message set, edition, endpoint or schema is published.
-
-- **Human URL:** [https://developer.lufthansa-cargo.com/apis/cargoimp](https://developer.lufthansa-cargo.com/apis/cargoimp)
-
-#### Tags
-
-- EDI
-- Cargo-IMP
-- IATA
-- Messaging
-- Prior Agreement
-
-#### Properties
-
-- [Documentation](https://developer.lufthansa-cargo.com/apis/cargoimp)
-- [Onboarding](https://developer.lufthansa-cargo.com/partneronboardingprocess)
-
-### Lufthansa Cargo AirMail API
-
-Prior-agreement API product covering airmail carriage for postal operators. The portal publishes an OpenAPI 3.0.3 info block titled "AirMail APIs" whose entire description is the prior-approval notice. No operations, endpoints or schemas are published, and no postal standard (UPU, CARDIT/RESDIT) is referenced anywhere on the portal.
-
-- **Human URL:** [https://developer.lufthansa-cargo.com/apis/airmail](https://developer.lufthansa-cargo.com/apis/airmail)
-
-#### Tags
-
-- Airmail
-- Postal
-- Air Cargo
-- Prior Agreement
-
-#### Properties
-
-- [Documentation](https://developer.lufthansa-cargo.com/apis/airmail)
-- [Onboarding](https://developer.lufthansa-cargo.com/partneronboardingprocess)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.lufthansa-cargo.com/)
-- [Developer Portal](https://developer.lufthansa-cargo.com/)
 - [Documentation](https://developer.lufthansa-cargo.com/how-to-connect)
-- [Onboarding](https://developer.lufthansa-cargo.com/partneronboardingprocess)
-- [Terms Of Service](https://developer.lufthansa-cargo.com/terms)
+- [Sign up](https://developer.lufthansa-cargo.com/login)
 - [Support](https://developer.lufthansa-cargo.com/contact)
-- [Email](mailto:apisupport.lcag@dlh.de)
-- [Change Log](https://developer.lufthansa-cargo.com/news)
-- [Sign Up](https://developer.lufthansa-cargo.com/login)
-- [Sandbox](https://developer-test.lufthansa-cargo.com)
-- [GitHub Organization](https://github.com/LufthansaCargo)
-- [LinkedIn](https://www.linkedin.com/company/lufthansa-cargo)
+- [Changelog](https://developer.lufthansa-cargo.com/news)
+- [Blog](https://www.lufthansa-cargo.com/en/ci/newsroom)
+- [Terms of service](https://developer.lufthansa-cargo.com/terms)
+- [GitHub](https://github.com/LufthansaCargo)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 17.0** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 50.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 2.4 |
+| Access clarity | 0.0 |
+
+**Agent readiness 18.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/lufthansa-cargo/](https://apis.io/providers/lufthansa-cargo/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Lufthansa Cargo: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/lufthansa-cargo/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
